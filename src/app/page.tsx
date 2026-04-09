@@ -1,6 +1,5 @@
 import { CategoryGrid } from "@/components/CategoryGrid";
 import Link from "next/link";
-import Image from "next/image";
 import { SearchForm } from "@/components/SearchForm";
 import { VideoCard } from "@/components/VideoCard";
 import { getSiteConfig } from "@/lib/config";
@@ -58,10 +57,12 @@ export default async function HomePage() {
                 <div className="channel-card__top">
                   {channel.thumbnailUrl ? (
                     <div className="channel-card__avatar">
-                      <Image
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         alt=""
                         className="channel-card__avatar-image"
                         height={68}
+                        loading="lazy"
                         src={channel.thumbnailUrl}
                         width={68}
                       />
