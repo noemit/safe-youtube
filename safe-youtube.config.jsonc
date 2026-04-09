@@ -63,7 +63,9 @@
 
   // Optional: paste full YouTube video links here.
   // These videos will be featured on the home page.
-  "featuredVideos": [],
+  "featuredVideos": [
+    "https://www.youtube.com/watch?v=01mRtqov4Nk&t=146s"
+  ],
 
   // Optional: paste channel handles, channel names, or full channel URLs here.
   // Example values:
