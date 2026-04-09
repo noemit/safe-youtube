@@ -11,14 +11,13 @@ export default async function HomePage() {
     getFeaturedVideos(config.featuredVideos),
     Promise.resolve(getChannelReferences(config.featuredChannels)),
   ]);
+  const modeLabel =
+    config.mode === "allowlist" ? "Allowlist mode" : "Blocklist mode";
 
   return (
     <main className="shell">
       <section className="hero">
         <div className="hero__copy">
-          <span className="eyebrow">
-            {config.mode === "allowlist" ? "Allowlist mode" : "Blocklist mode"}
-          </span>
           <h1>{config.siteTitle}</h1>
           <p>{config.welcomeMessage}</p>
           <SearchForm />
@@ -95,6 +94,18 @@ export default async function HomePage() {
           </div>
         )}
       </section>
+
+      <footer
+        style={{
+          marginTop: "2.5rem",
+          color: "var(--muted)",
+          fontSize: "0.72rem",
+          opacity: 0.8,
+          textAlign: "center",
+        }}
+      >
+        Mode: {modeLabel}
+      </footer>
     </main>
   );
 }
