@@ -3,11 +3,11 @@
   "siteDescription": "A calmer YouTube setup for everyday family use.",
   "welcomeMessage": "Search normally, but keep out the channels and keywords you do not want in the house.",
   "mode": "blocklist",
-  "quickSearches": [
-    "animal facts for kids",
-    "easy crafts for kids",
-    "lego building ideas",
-    "science experiments for kids"
+  "categories": [
+    { "label": "Animals", "query": "animal facts for kids" },
+    { "label": "Crafts", "query": "easy crafts for kids" },
+    { "label": "Lego", "query": "lego building ideas" },
+    { "label": "Science", "query": "science experiments for kids" }
   ],
   "featuredVideos": [],
   "featuredChannels": [
@@ -43,4 +43,3 @@
     "accentTint": "#f3d2c7"
   }
 }
-

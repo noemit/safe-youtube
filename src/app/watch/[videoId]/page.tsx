@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { HomeButton } from "@/components/HomeButton";
 import { WatchPlayer } from "@/components/WatchPlayer";
 import { getSiteConfig } from "@/lib/config";
 import { filterSearchResults, extractVideoId } from "@/lib/filters";
@@ -8,26 +8,15 @@ type WatchPageProps = {
   params: Promise<{
     videoId: string;
   }>;
-  searchParams: Promise<{
-    q?: string | string[];
-  }>;
 };
-
-function readQueryValue(value: string | string[] | undefined): string {
-  if (Array.isArray(value)) {
-    return value[0] ?? "";
-  }
-
-  return value ?? "";
-}
 
 export default async function WatchPage({
   params,
-  searchParams,
 }: WatchPageProps) {
-  const [{ videoId: rawVideoId }, resolvedSearchParams, config] =
-    await Promise.all([params, searchParams, getSiteConfig()]);
-  const query = readQueryValue(resolvedSearchParams.q);
+  const [{ videoId: rawVideoId }, config] = await Promise.all([
+    params,
+    getSiteConfig(),
+  ]);
   const videoId = extractVideoId(rawVideoId);
 
   if (!videoId) {
@@ -36,9 +25,7 @@ export default async function WatchPage({
         <section className="empty-card">
           <h1>Video not found</h1>
           <p>The video link is not valid.</p>
-          <Link className="pill" href="/">
-            Go home
-          </Link>
+          <HomeButton />
         </section>
       </main>
     );
@@ -59,16 +46,7 @@ export default async function WatchPage({
             The current rules in <code>safe-youtube.config.jsonc</code> do not
             allow this video.
           </p>
-          <div className="pill-row">
-            {query ? (
-              <Link className="pill" href={`/search?q=${encodeURIComponent(query)}`}>
-                Back to search
-              </Link>
-            ) : null}
-            <Link className="pill" href="/">
-              Home
-            </Link>
-          </div>
+          <HomeButton />
         </section>
       </main>
     );
@@ -89,16 +67,7 @@ export default async function WatchPage({
           ) : null}
         </div>
 
-        <div className="pill-row">
-          {query ? (
-            <Link className="pill" href={`/search?q=${encodeURIComponent(query)}`}>
-              Back to search
-            </Link>
-          ) : null}
-          <Link className="pill" href="/">
-            Home
-          </Link>
-        </div>
+        <HomeButton />
       </section>
 
       <section className="player-card">

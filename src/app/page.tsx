@@ -1,3 +1,4 @@
+import { CategoryGrid } from "@/components/CategoryGrid";
 import Link from "next/link";
 import { SearchForm } from "@/components/SearchForm";
 import { VideoCard } from "@/components/VideoCard";
@@ -50,24 +51,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {config.quickSearches.length > 0 ? (
+      {config.categories.length > 0 ? (
         <section className="section">
           <div className="section__heading">
-            <h2>Quick Topics</h2>
-            <p>Tap one to search without typing.</p>
+            <h2>Pick a Topic</h2>
+            <p>Tap a big button to start.</p>
           </div>
 
-          <div className="pill-row">
-            {config.quickSearches.map((term) => (
-              <Link
-                key={term}
-                className="pill"
-                href={`/search?q=${encodeURIComponent(term)}`}
-              >
-                {term}
-              </Link>
-            ))}
-          </div>
+          <CategoryGrid categories={config.categories} />
         </section>
       ) : null}
 

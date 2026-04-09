@@ -8,18 +8,31 @@
   // This text appears near the main search box.
   "welcomeMessage": "Set safer search rules, approve good channels, and make video hopping less rewarding.",
 
+  // These big buttons appear on the home screen.
+  // Keep the labels short so young readers can understand them easily.
+  "categories": [
+    {
+      "label": "Animals",
+      "query": "animal facts for kids"
+    },
+    {
+      "label": "Space",
+      "query": "space documentary for kids"
+    },
+    {
+      "label": "Drawing",
+      "query": "drawing tutorial for beginners"
+    },
+    {
+      "label": "Lego",
+      "query": "lego building ideas"
+    }
+  ],
+
   // Choose one:
   // "blocklist" = hide anything that matches your blocked words, channels, or videos.
   // "allowlist" = only show approved topics, approved channels, or approved videos.
   "mode": "blocklist",
-
-  // These buttons appear on the home screen.
-  "quickSearches": [
-    "animal facts for kids",
-    "space documentary for kids",
-    "drawing tutorial for beginners",
-    "lego building ideas"
-  ],
 
   // Optional: paste full YouTube video links here.
   // These videos will be featured on the home page.

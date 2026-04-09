@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { CategoryGrid } from "@/components/CategoryGrid";
+import { HomeButton } from "@/components/HomeButton";
 import { SearchForm } from "@/components/SearchForm";
 import { VideoCard } from "@/components/VideoCard";
 import { getSiteConfig } from "@/lib/config";
@@ -70,24 +71,17 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             from your config file before showing any results.
           </p>
         </div>
-        <SearchForm defaultValue={query} />
+        <div className="page-banner__actions">
+          <SearchForm defaultValue={query} />
+          <HomeButton />
+        </div>
       </section>
 
       {!query ? (
         <section className="empty-card">
           <h2>Start with a topic</h2>
           <p>Use the search box above, or try one of these suggestions.</p>
-          <div className="pill-row">
-            {config.quickSearches.map((term) => (
-              <Link
-                key={term}
-                className="pill"
-                href={`/search?q=${encodeURIComponent(term)}`}
-              >
-                {term}
-              </Link>
-            ))}
-          </div>
+          <CategoryGrid categories={config.categories} />
         </section>
       ) : null}
 

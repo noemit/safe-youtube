@@ -31,6 +31,7 @@ You control the rules in `safe-youtube.config.jsonc`.
 
 That file can do all of this:
 
+- `categories`: big home-screen buttons that parents define in the config
 - `blocklist` mode: normal search, but hide results that match blocked words, channels, or videos
 - `allowlist` mode: only show approved searches, approved channels, or approved videos
 - feature trusted channels on the home page
@@ -110,6 +111,7 @@ In most cases, you only need to:
 
 - change words inside quotes
 - add or remove lines inside lists
+- edit the `categories` buttons
 - switch between `blocklist` and `allowlist`
 - turn the rapid-switch guard on or off
 
@@ -219,7 +221,7 @@ Inside `safe-youtube.config.jsonc`:
 - `siteDescription`: short browser and home-screen description
 - `welcomeMessage`: text shown on the home page
 - `mode`: `"blocklist"` or `"allowlist"`
-- `quickSearches`: one-tap search buttons on the home page
+- `categories`: big topic buttons on the home page
 - `featuredVideos`: full YouTube links shown on the home page
 - `featuredChannels`: trusted channels shown on the home page
 - `blockedWords`: hide results whose title, description, or channel matches these terms
@@ -325,9 +327,13 @@ If you want the smallest possible first change, edit just these fields:
 
 ```jsonc
 "siteTitle": "Maya's Safe YouTube",
+"categories": [
+  { "label": "Animals", "query": "animals for kids" },
+  { "label": "Drawing", "query": "drawing for kids" },
+  { "label": "Space", "query": "space for kids" }
+],
 "mode": "blocklist",
 "blockedWords": ["horror", "violence", "prank"],
-"quickSearches": ["animals", "drawing", "space"],
 "videoSwitchingControl": {
   "enabled": true,
   "mode": "cooldown",

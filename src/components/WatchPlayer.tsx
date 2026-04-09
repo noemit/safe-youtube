@@ -222,6 +222,7 @@ export function WatchPlayer({ videoId, title, control }: WatchPlayerProps) {
   ]);
 
   const isReady = guardState.status === "ready";
+  const embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&playsinline=1&iv_load_policy=3`;
 
   return (
     <div className="player-frame player-frame--guarded">
@@ -231,7 +232,7 @@ export function WatchPlayer({ videoId, title, control }: WatchPlayerProps) {
           allowFullScreen
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
+          src={embedSrc}
           title={title}
         />
       ) : (

@@ -12,6 +12,24 @@ const DEFAULT_CONFIG: SiteConfig = {
     "A parent-friendly YouTube wrapper with common-sense controls for kids.",
   welcomeMessage:
     "Set safer search rules, approve good channels, and make video hopping less rewarding.",
+  categories: [
+    {
+      label: "Animals",
+      query: "animal facts for kids",
+    },
+    {
+      label: "Space",
+      query: "space documentary for kids",
+    },
+    {
+      label: "Drawing",
+      query: "drawing tutorial for beginners",
+    },
+    {
+      label: "Lego",
+      query: "lego building ideas",
+    },
+  ],
   mode: "blocklist",
   quickSearches: [
     "animal facts for kids",
@@ -64,6 +82,35 @@ function sanitizeTextArray(value: unknown): string[] {
     .filter(Boolean);
 }
 
+function sanitizeCategories(
+  value: unknown,
+): Array<{ label: string; query: string }> {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item) => {
+      if (!item || typeof item !== "object") {
+        return null;
+      }
+
+      const category = item as {
+        label?: unknown;
+        query?: unknown;
+      };
+      const label = sanitizeText(category.label, "");
+      const query = sanitizeText(category.query, "");
+
+      if (!label || !query) {
+        return null;
+      }
+
+      return { label, query };
+    })
+    .filter((item): item is { label: string; query: string } => item !== null);
+}
+
 function sanitizeColor(value: unknown, fallback: string): string {
   if (typeof value !== "string") {
     return fallback;
@@ -98,6 +145,16 @@ function normalizeConfig(raw: unknown): SiteConfig {
   };
 
   const mode = config.mode === "allowlist" ? "allowlist" : "blocklist";
+  const quickSearches = sanitizeTextArray(config.quickSearches);
+  const hasCategories = Array.isArray(config.categories);
+  const categories = hasCategories
+    ? sanitizeCategories(config.categories)
+    : quickSearches.length > 0
+      ? quickSearches.map((term) => ({
+          label: term,
+          query: term,
+        }))
+      : DEFAULT_CONFIG.categories;
 
   return {
     siteTitle: sanitizeText(config.siteTitle, DEFAULT_CONFIG.siteTitle),
@@ -109,8 +166,9 @@ function normalizeConfig(raw: unknown): SiteConfig {
       config.welcomeMessage,
       DEFAULT_CONFIG.welcomeMessage,
     ),
+    categories,
     mode,
-    quickSearches: sanitizeTextArray(config.quickSearches),
+    quickSearches,
     featuredVideos: sanitizeTextArray(config.featuredVideos),
     featuredChannels: sanitizeTextArray(config.featuredChannels),
     blockedWords: sanitizeTextArray(config.blockedWords),

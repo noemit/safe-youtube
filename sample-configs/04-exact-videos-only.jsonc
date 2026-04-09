@@ -3,7 +3,7 @@
   "siteDescription": "A locked-down setup that only shows exact videos chosen by a parent.",
   "welcomeMessage": "Replace the sample video links below with the exact YouTube videos you want to allow.",
   "mode": "allowlist",
-  "quickSearches": [],
+  "categories": [],
   "featuredVideos": [
     "https://www.youtube.com/watch?v=VIDEO_ID_1",
     "https://www.youtube.com/watch?v=VIDEO_ID_2"

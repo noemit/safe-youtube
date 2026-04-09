@@ -6,6 +6,11 @@ export interface SiteTheme {
   accentTint: string;
 }
 
+export interface SearchCategory {
+  label: string;
+  query: string;
+}
+
 export interface VideoSwitchingControl {
   enabled: boolean;
   mode: VideoSwitchingMode;
@@ -21,6 +26,7 @@ export interface SiteConfig {
   siteTitle: string;
   siteDescription: string;
   welcomeMessage: string;
+  categories: SearchCategory[];
   mode: FilterMode;
   quickSearches: string[];
   featuredVideos: string[];
