@@ -23,32 +23,6 @@ export default async function HomePage() {
           <p>{config.welcomeMessage}</p>
           <SearchForm />
         </div>
-
-        <div className="hero__panel card">
-          <h2>Common-sense controls for parents</h2>
-          <p>
-            {config.mode === "allowlist"
-              ? "Only approved searches, approved channels, or approved videos are shown."
-              : "Kids can still search normally, but results that match your blocked rules are hidden."}
-          </p>
-
-          <div className="stat-grid">
-            <div>
-              <strong>{config.blockedWords.length}</strong>
-              <span>blocked words</span>
-            </div>
-            <div>
-              <strong>{config.allowedChannels.length}</strong>
-              <span>approved channels</span>
-            </div>
-            <div>
-              <strong>
-                {config.videoSwitchingControl.enabled ? "On" : "Off"}
-              </strong>
-              <span>rapid-switch guard</span>
-            </div>
-          </div>
-        </div>
       </section>
 
       {config.categories.length > 0 ? (
