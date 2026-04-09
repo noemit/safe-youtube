@@ -12,4 +12,9 @@ Use them like this:
 
 These sample files are only starting points. You should still review the blocked words, channels, and videos yourself.
 
+In `categories`:
+
+- `label` is the text a child sees on the button
+- `searchFor` is the phrase Safe YouTube searches for after the child taps that button
+
 Emoji labels in `categories` are fine and can make topic buttons easier for younger kids to recognize.

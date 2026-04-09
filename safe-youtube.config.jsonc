@@ -9,24 +9,27 @@
   "welcomeMessage": "Set safer search rules, approve good channels, and make video hopping less rewarding.",
 
   // These big buttons appear on the home screen.
+  // When a child taps one, the app runs a YouTube search using the words in `searchFor`.
+  // `label` = what the child sees on the button.
+  // `searchFor` = what Safe YouTube searches for after the tap.
   // Keep the labels short so young readers can understand them easily.
   // Emojis are fine here and can make the topics easier to spot.
   "categories": [
     {
       "label": "🐘 Animals",
-      "query": "animal facts for kids"
+      "searchFor": "animal facts for kids"
     },
     {
       "label": "🚀 Space",
-      "query": "space documentary for kids"
+      "searchFor": "space documentary for kids"
     },
     {
       "label": "🎨 Drawing",
-      "query": "drawing tutorial for beginners"
+      "searchFor": "drawing tutorial for beginners"
     },
     {
       "label": "🧱 Lego",
-      "query": "lego building ideas"
+      "searchFor": "lego building ideas"
     }
   ],
 

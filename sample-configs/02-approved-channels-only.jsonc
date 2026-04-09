@@ -3,11 +3,13 @@
   "siteDescription": "A stricter Safe YouTube setup for younger kids.",
   "welcomeMessage": "This version only shows videos from trusted channels picked by a parent.",
   "mode": "allowlist",
+  // `label` = the button a child sees.
+  // `searchFor` = the words Safe YouTube searches for when that button is tapped.
   "categories": [
-    { "label": "🧪 Science", "query": "science for kids" },
-    { "label": "🎨 Drawing", "query": "drawing for kids" },
-    { "label": "🔤 Phonics", "query": "phonics songs" },
-    { "label": "🌿 Nature", "query": "nature for kids" }
+    { "label": "🧪 Science", "searchFor": "science for kids" },
+    { "label": "🎨 Drawing", "searchFor": "drawing for kids" },
+    { "label": "🔤 Phonics", "searchFor": "phonics songs" },
+    { "label": "🌿 Nature", "searchFor": "nature for kids" }
   ],
   "featuredVideos": [],
   "featuredChannels": [

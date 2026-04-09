@@ -3,11 +3,13 @@
   "siteDescription": "A parent setup that allows browsing, but slows down rapid skipping.",
   "welcomeMessage": "Use parent-approved search rules, and make endless video hopping less rewarding.",
   "mode": "blocklist",
+  // `label` = the button a child sees.
+  // `searchFor` = the words Safe YouTube searches for when that button is tapped.
   "categories": [
-    { "label": "📚 Stories", "query": "bedtime stories for kids" },
-    { "label": "🎵 Music", "query": "sleep music for kids" },
-    { "label": "🌬️ Breathing", "query": "guided breathing for children" },
-    { "label": "🎨 Drawing", "query": "calm drawing tutorial" }
+    { "label": "📚 Stories", "searchFor": "bedtime stories for kids" },
+    { "label": "🎵 Music", "searchFor": "sleep music for kids" },
+    { "label": "🌬️ Breathing", "searchFor": "guided breathing for children" },
+    { "label": "🎨 Drawing", "searchFor": "calm drawing tutorial" }
   ],
   "featuredVideos": [],
   "featuredChannels": [

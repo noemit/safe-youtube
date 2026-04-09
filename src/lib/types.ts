@@ -8,7 +8,7 @@ export interface SiteTheme {
 
 export interface SearchCategory {
   label: string;
-  query: string;
+  searchFor: string;
 }
 
 export interface WatchExperience {

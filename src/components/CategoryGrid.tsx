@@ -5,34 +5,17 @@ interface CategoryGridProps {
   categories: SearchCategory[];
 }
 
-function getBadge(label: string): string {
-  const trimmed = label.trim();
-
-  if (!trimmed) {
-    return "GO";
-  }
-
-  const [firstWord, secondWord] = trimmed.split(/\s+/);
-
-  if (secondWord) {
-    return `${firstWord[0] ?? ""}${secondWord[0] ?? ""}`.toUpperCase();
-  }
-
-  return trimmed.slice(0, 2).toUpperCase();
-}
-
 export function CategoryGrid({ categories }: CategoryGridProps) {
   return (
     <div className="category-grid">
       {categories.map((category) => (
         <Link
-          key={`${category.label}-${category.query}`}
+          key={`${category.label}-${category.searchFor}`}
           className="category-card"
-          href={`/search?q=${encodeURIComponent(category.query)}`}
+          href={`/search?q=${encodeURIComponent(category.searchFor)}`}
         >          <strong>{category.label}</strong>
         </Link>
       ))}
     </div>
   );
 }
-

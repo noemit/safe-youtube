@@ -95,7 +95,9 @@ function getConfigWarnings(parsed: unknown): string[] {
   }
 
   if (config.categories && !Array.isArray(config.categories)) {
-    warnings.push("`categories` should be a list of `{ label, query }` items.");
+    warnings.push(
+      "`categories` should be a list of `{ label, searchFor }` items.",
+    );
   }
 
   if (Array.isArray(config.categories)) {
@@ -104,13 +106,22 @@ function getConfigWarnings(parsed: unknown): string[] {
         return true;
       }
 
-      const category = item as { label?: unknown; query?: unknown };
-      return typeof category.label !== "string" || typeof category.query !== "string";
+      const category = item as {
+        label?: unknown;
+        searchFor?: unknown;
+        query?: unknown;
+      };
+
+      return (
+        typeof category.label !== "string" ||
+        (typeof category.searchFor !== "string" &&
+          typeof category.query !== "string")
+      );
     });
 
     if (hasBrokenCategory) {
       warnings.push(
-        "Each `categories` item should look like `{ \"label\": \"Animals\", \"query\": \"animal facts for kids\" }`.",
+        "Each `categories` item should look like `{ \"label\": \"Animals\", \"searchFor\": \"animal facts for kids\" }`.",
       );
     }
   }
@@ -154,8 +165,8 @@ const EXAMPLE_TEXT = `{
   // Paste your Safe YouTube config here.
   "siteTitle": "Maya's Safe YouTube",
   "categories": [
-    { "label": "🐘 Animals", "query": "animals for kids" },
-    { "label": "🎨 Drawing", "query": "drawing for kids" }
+    { "label": "🐘 Animals", "searchFor": "animals for kids" },
+    { "label": "🎨 Drawing", "searchFor": "drawing for kids" }
   ],
   "watchSuggestions": [
     "https://www.youtube.com/watch?v=VIDEO_ID_1"

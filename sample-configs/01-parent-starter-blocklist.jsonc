@@ -3,11 +3,13 @@
   "siteDescription": "A calmer YouTube setup for everyday family use.",
   "welcomeMessage": "Search normally, but keep out the channels and keywords you do not want in the house.",
   "mode": "blocklist",
+  // `label` = the button a child sees.
+  // `searchFor` = the words Safe YouTube searches for when that button is tapped.
   "categories": [
-    { "label": "🐘 Animals", "query": "animal facts for kids" },
-    { "label": "✂️ Crafts", "query": "easy crafts for kids" },
-    { "label": "🧱 Lego", "query": "lego building ideas" },
-    { "label": "🧪 Science", "query": "science experiments for kids" }
+    { "label": "🐘 Animals", "searchFor": "animal facts for kids" },
+    { "label": "✂️ Crafts", "searchFor": "easy crafts for kids" },
+    { "label": "🧱 Lego", "searchFor": "lego building ideas" },
+    { "label": "🧪 Science", "searchFor": "science experiments for kids" }
   ],
   "featuredVideos": [],
   "featuredChannels": [

@@ -15,19 +15,19 @@ const DEFAULT_CONFIG: SiteConfig = {
   categories: [
     {
       label: "🐘 Animals",
-      query: "animal facts for kids",
+      searchFor: "animal facts for kids",
     },
     {
       label: "🚀 Space",
-      query: "space documentary for kids",
+      searchFor: "space documentary for kids",
     },
     {
       label: "🎨 Drawing",
-      query: "drawing tutorial for beginners",
+      searchFor: "drawing tutorial for beginners",
     },
     {
       label: "🧱 Lego",
-      query: "lego building ideas",
+      searchFor: "lego building ideas",
     },
   ],
   mode: "blocklist",
@@ -91,7 +91,7 @@ function sanitizeTextArray(value: unknown): string[] {
 
 function sanitizeCategories(
   value: unknown,
-): Array<{ label: string; query: string }> {
+): Array<{ label: string; searchFor: string }> {
   if (!Array.isArray(value)) {
     return [];
   }
@@ -104,18 +104,24 @@ function sanitizeCategories(
 
       const category = item as {
         label?: unknown;
+        searchFor?: unknown;
         query?: unknown;
       };
       const label = sanitizeText(category.label, "");
-      const query = sanitizeText(category.query, "");
+      const searchFor = sanitizeText(
+        category.searchFor ?? category.query,
+        "",
+      );
 
-      if (!label || !query) {
+      if (!label || !searchFor) {
         return null;
       }
 
-      return { label, query };
+      return { label, searchFor };
     })
-    .filter((item): item is { label: string; query: string } => item !== null);
+    .filter(
+      (item): item is { label: string; searchFor: string } => item !== null,
+    );
 }
 
 function sanitizeColor(value: unknown, fallback: string): string {
@@ -169,7 +175,7 @@ function normalizeConfig(raw: unknown): SiteConfig {
     : quickSearches.length > 0
       ? quickSearches.map((term) => ({
           label: term,
-          query: term,
+          searchFor: term,
         }))
       : DEFAULT_CONFIG.categories;
 
