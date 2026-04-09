@@ -256,6 +256,137 @@ code {
   align-items: end;
 }
 
+.checker-layout {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.checker-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+}
+
+.checker-panel__header {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.checker-panel__header h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  letter-spacing: -0.04em;
+}
+
+.checker-panel__header p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.checker-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.checker-secondary-button {
+  min-height: 3rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(29, 36, 51, 0.12);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.checker-textarea-wrap {
+  position: relative;
+}
+
+.checker-textarea {
+  width: 100%;
+  min-height: 21rem;
+  padding: 1rem 1rem 2rem;
+  border: 1px solid rgba(29, 36, 51, 0.12);
+  border-radius: 1.2rem;
+  background: var(--surface-strong);
+  color: var(--text);
+  font: 500 0.98rem/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  resize: vertical;
+}
+
+.checker-textarea--output {
+  min-height: 16rem;
+}
+
+.checker-line-count {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.8rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.checker-status {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+  border-radius: 1.2rem;
+}
+
+.checker-status strong,
+.checker-clean-output h2 {
+  margin: 0;
+}
+
+.checker-status p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.checker-status--neutral {
+  background: rgba(97, 112, 139, 0.08);
+}
+
+.checker-status--success {
+  background: rgba(100, 180, 156, 0.16);
+}
+
+.checker-status--warning {
+  background: rgba(227, 172, 81, 0.18);
+}
+
+.checker-status--error {
+  background: rgba(215, 101, 70, 0.14);
+}
+
+.checker-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text);
+}
+
+.checker-code {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  background: rgba(29, 36, 51, 0.08);
+  overflow-x: auto;
+  font: 500 0.94rem/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.checker-clean-output {
+  display: grid;
+  gap: 1rem;
+}
+
 .pill-row {
   display: flex;
   flex-wrap: wrap;
@@ -539,6 +670,15 @@ code {
   .watch-header {
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
     align-items: end;
+  }
+
+  .checker-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .checker-panel__header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
   }
 }
 

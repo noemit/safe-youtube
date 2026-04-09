@@ -128,6 +128,9 @@ In most cases, you only need to:
 
 There are no environment variables required for the default setup.
 
+If you already have a live copy of the app, you can also open `/jsonc-checker`
+on that site and paste your config there before your next deployment.
+
 ### 5. Add It To The iPad Home Screen
 
 1. Open your deployed site in Safari on the iPad
@@ -321,6 +324,7 @@ npm start
 - the rapid-switch guard runs in the browser so it can react to how quickly a child opens new videos
 - the app includes a manifest and service worker so it can be added to an iPad home screen
 - ad-free playback depends on YouTube and YouTube Premium, not on this app itself
+- the `/jsonc-checker` page can validate pasted config text and provide a cleaned copy
 
 ## Good First Edit
 
