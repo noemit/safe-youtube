@@ -29,9 +29,7 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
           key={`${category.label}-${category.query}`}
           className="category-card"
           href={`/search?q=${encodeURIComponent(category.query)}`}
-        >
-          <span className="category-card__badge">{getBadge(category.label)}</span>
-          <strong>{category.label}</strong>
+        >          <strong>{category.label}</strong>
         </Link>
       ))}
     </div>

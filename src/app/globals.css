@@ -504,20 +504,6 @@ code {
     var(--surface-strong);
 }
 
-.category-card__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 4.2rem;
-  height: 4.2rem;
-  border-radius: 1.35rem;
-  background: linear-gradient(135deg, var(--accent), #c04f36);
-  color: white;
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
 
 .category-card strong {
   font-family: var(--font-heading);
