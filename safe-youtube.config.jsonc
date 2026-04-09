@@ -1,0 +1,62 @@
+{
+  // The name shown in the browser, on the home screen, and in the app.
+  "siteTitle": "Safe YouTube",
+
+  // A short sentence that explains what this app is for.
+  "siteDescription": "A calmer YouTube wrapper for families, schools, and therapy sessions.",
+
+  // This text appears near the main search box.
+  "welcomeMessage": "Search YouTube with your own rules, or tap one of the quick topics below.",
+
+  // Choose one:
+  // "blocklist" = hide anything that matches your blocked words, channels, or videos.
+  // "allowlist" = only show approved topics, approved channels, or approved videos.
+  "mode": "blocklist",
+
+  // These buttons appear on the home screen.
+  "quickSearches": [
+    "animal facts for kids",
+    "space documentary for kids",
+    "drawing tutorial for beginners",
+    "lego building ideas"
+  ],
+
+  // Optional: paste full YouTube video links here.
+  // These videos will be featured on the home page.
+  "featuredVideos": [],
+
+  // Optional: paste channel handles, channel names, or full channel URLs here.
+  // Example values:
+  // "@SciShowKids"
+  // "National Geographic Kids"
+  // "https://www.youtube.com/@ArtforKidsHub"
+  "featuredChannels": [],
+
+  // BLOCKLIST MODE
+  // Hide results if the title, description, or channel contains any of these words.
+  "blockedWords": ["horror", "gore", "violence", "prank"],
+
+  // Hide results from these channels.
+  "blockedChannels": [],
+
+  // Hide specific videos by pasting full YouTube links or 11-character video IDs.
+  "blockedVideos": [],
+
+  // ALLOWLIST MODE
+  // Optional: only allow searches that contain one of these terms.
+  // Leave this empty if you only want to approve by channel or video.
+  "allowedSearchTerms": [],
+
+  // Only show videos from these channels.
+  "allowedChannels": [],
+
+  // Only show these exact videos.
+  "allowedVideos": [],
+
+  // Simple colors for the app shell.
+  "theme": {
+    "accentColor": "#d76546",
+    "accentTint": "#f3d2c7"
+  }
+}
+
