@@ -1,15 +1,16 @@
 import { CategoryGrid } from "@/components/CategoryGrid";
 import Link from "next/link";
+import Image from "next/image";
 import { SearchForm } from "@/components/SearchForm";
 import { VideoCard } from "@/components/VideoCard";
 import { getSiteConfig } from "@/lib/config";
-import { getFeaturedVideos, getChannelReferences } from "@/lib/youtube";
+import { getFeaturedChannels, getFeaturedVideos } from "@/lib/youtube";
 
 export default async function HomePage() {
   const config = await getSiteConfig();
   const [featuredVideos, featuredChannels] = await Promise.all([
     getFeaturedVideos(config.featuredVideos),
-    Promise.resolve(getChannelReferences(config.featuredChannels)),
+    getFeaturedChannels(config.featuredChannels),
   ]);
   const modeLabel =
     config.mode === "allowlist" ? "Allowlist mode" : "Blocklist mode";
@@ -47,9 +48,29 @@ export default async function HomePage() {
                 className="channel-card"
                 href={`/search?q=${encodeURIComponent(channel.searchQuery)}`}
               >
-                <span className="channel-card__badge">Channel</span>
-                <strong>{channel.label}</strong>
-                <span>Search videos from this channel</span>
+                <div className="channel-card__top">
+                  {channel.thumbnailUrl ? (
+                    <div className="channel-card__avatar">
+                      <Image
+                        alt=""
+                        className="channel-card__avatar-image"
+                        height={68}
+                        src={channel.thumbnailUrl}
+                        width={68}
+                      />
+                    </div>
+                  ) : (
+                    <div className="channel-card__avatar channel-card__avatar--fallback">
+                      {channel.label.trim().charAt(0).toUpperCase() || "C"}
+                    </div>
+                  )}
+
+                  <div className="channel-card__copy">
+                    <span className="channel-card__badge">Channel</span>
+                    <strong>{channel.label}</strong>
+                    <span>Search videos from this channel</span>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>

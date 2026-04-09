@@ -469,8 +469,45 @@ code {
 
 .channel-card {
   display: grid;
-  gap: 0.4rem;
+  gap: 0.75rem;
   padding: 1.2rem;
+}
+
+.channel-card__top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.95rem;
+}
+
+.channel-card__avatar {
+  width: 4.2rem;
+  height: 4.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(29, 36, 51, 0.08);
+  border-radius: 999px;
+  background: rgba(243, 210, 199, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.channel-card__avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.channel-card__avatar--fallback {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.channel-card__copy {
+  display: grid;
+  gap: 0.35rem;
 }
 
 .channel-card__badge {
@@ -488,7 +525,7 @@ code {
   font-size: 1.2rem;
 }
 
-.channel-card span:last-child {
+.channel-card__copy span:last-child {
   color: var(--muted);
 }
 

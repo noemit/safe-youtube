@@ -44,7 +44,12 @@
   // "@SciShowKids"
   // "National Geographic Kids"
   // "https://www.youtube.com/@ArtforKidsHub"
-  "featuredChannels": [],
+  "featuredChannels": [
+    "@SLICKSLIMESAMDIYComedyScience",
+    "@Blippi",
+    "@Numberblocks",
+    "@NumberjacksTV"
+  ],
 
   // Optional: these approved videos can appear below the player and be used
   // as "next up" suggestions after a video ends.

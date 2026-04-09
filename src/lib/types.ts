@@ -75,6 +75,8 @@ export interface ChannelReference {
   raw: string;
   label: string;
   searchQuery: string;
+  channelUrl?: string;
+  thumbnailUrl?: string;
 }
 
 export interface SearchSummary {
