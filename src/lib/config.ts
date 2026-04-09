@@ -70,8 +70,8 @@ const DEFAULT_CONFIG: SiteConfig = {
     buttonText: "Continue to the video",
   },
   theme: {
-    accentColor: "#d76546",
-    accentTint: "#f3d2c7",
+    accentColor: "#ff0033",
+    accentTint: "#2b1217",
   },
 };
 

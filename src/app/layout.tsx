@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     applicationName: config.siteTitle,
     appleWebApp: {
       capable: true,
-      statusBarStyle: "default",
+      statusBarStyle: "black-translucent",
       title: config.siteTitle,
     },
     icons: {
@@ -30,7 +30,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#d76546",
+  themeColor: "#0f0f0f",
 };
 
 export default async function RootLayout({
