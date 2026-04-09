@@ -31,6 +31,7 @@ You control the rules in `safe-youtube.config.jsonc`.
 
 That file can do all of this:
 
+- `simpleSettings`: easy yes/no switches near the top of the file
 - `categories`: big home-screen buttons that parents define in the config, including optional emoji labels. Each one runs a search using the words in `searchFor`.
 - `blocklist` mode: normal search, but hide results that match blocked words, channels, or videos
 - `allowlist` mode: only show approved searches, approved channels, or approved videos
@@ -45,6 +46,8 @@ The main file is:
 `safe-youtube.config.jsonc`
 
 It uses `jsonc`, which means it can include comments. The comments inside the file explain what each setting does in plain language.
+
+For most parents, the easiest place to start is the `simpleSettings` block near the top.
 
 ## Start With A Preset
 
@@ -70,7 +73,7 @@ If you want the shortest path:
 
 1. Fork this repo on GitHub
 2. Copy one preset from `sample-configs/` into `safe-youtube.config.jsonc`
-3. Edit the words, channels, or videos
+3. Edit the top `simpleSettings` switches, then the words, channels, or videos
 4. Import your fork into Vercel
 5. Click Deploy
 6. Open the site on the iPad in Safari
@@ -109,11 +112,11 @@ If you prefer, you can skip this and just edit `safe-youtube.config.jsonc` direc
 
 In most cases, you only need to:
 
+- change `1` to `0`, or `0` to `1`, in the top `simpleSettings` block
 - change words inside quotes
 - add or remove lines inside lists
 - edit the `categories` button text and the `searchFor` phrase Safe YouTube should search for
-- switch between `blocklist` and `allowlist`
-- turn the rapid-switch guard on or off
+- optionally change `blocklist` and `allowlist` later if you want more advanced control
 
 ### 4. Deploy To Vercel For Free
 
@@ -140,7 +143,41 @@ on that site and paste your config there before your next deployment.
 
 It will feel more like an app and less like a normal browser tab.
 
+## The Easy Switches At The Top
+
+Near the top of the config file, you will see:
+
+```jsonc
+"simpleSettings": {
+  "allowSearching": 1,
+  "allowOnlyApprovedChannels": 0,
+  "allowOnlyApprovedVideos": 0,
+  "slowDownFastSwitching": 0
+}
+```
+
+How to read those:
+
+- `1` means yes
+- `0` means no
+
+What each one does:
+
+- `allowSearching`: show the typing search box
+- `allowOnlyApprovedChannels`: only allow videos from the channels in `allowedChannels`
+- `allowOnlyApprovedVideos`: only allow the exact video links in `allowedVideos`
+- `slowDownFastSwitching`: turn on the pause that makes constant video hopping less rewarding
+
+Important:
+
+- if `allowOnlyApprovedChannels` is `1`, fill in `allowedChannels` below
+- if `allowOnlyApprovedVideos` is `1`, fill in `allowedVideos` below, or the app may feel empty
+- if `allowSearching` is `0`, kids can still tap topic buttons and trusted channels
+- most parents can use these top switches without touching the advanced mode settings below
+
 ## Two Main Filtering Styles
+
+This is the more advanced layer. Most parents can start with `simpleSettings` first.
 
 ### Option A: `blocklist`
 
@@ -248,6 +285,11 @@ Inside `safe-youtube.config.jsonc`:
 - `siteTitle`: the app name
 - `siteDescription`: short browser and home-screen description
 - `welcomeMessage`: text shown on the home page
+- `simpleSettings`: the easiest top-of-file yes/no switches
+- `simpleSettings.allowSearching`: `1` shows the search box, `0` hides it
+- `simpleSettings.allowOnlyApprovedChannels`: `1` means only channels in `allowedChannels` are allowed
+- `simpleSettings.allowOnlyApprovedVideos`: `1` means only exact links in `allowedVideos` are allowed
+- `simpleSettings.slowDownFastSwitching`: `1` turns on the rapid-switch pause
 - `mode`: `"blocklist"` or `"allowlist"`
 - `categories`: big topic buttons on the home page. Each one has a `label` and a `searchFor` phrase.
 - `featuredVideos`: full YouTube links shown on the home page
@@ -360,6 +402,12 @@ If you want the smallest possible first change, edit just these fields:
 
 ```jsonc
 "siteTitle": "Maya's Safe YouTube",
+"simpleSettings": {
+  "allowSearching": 1,
+  "allowOnlyApprovedChannels": 0,
+  "allowOnlyApprovedVideos": 0,
+  "slowDownFastSwitching": 1
+},
 "categories": [
   { "label": "🐘 Animals", "searchFor": "animals for kids" },
   { "label": "🎨 Drawing", "searchFor": "drawing for kids" },

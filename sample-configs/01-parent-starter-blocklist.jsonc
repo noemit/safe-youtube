@@ -2,6 +2,13 @@
   "siteTitle": "Kids Safe YouTube",
   "siteDescription": "A calmer YouTube setup for everyday family use.",
   "welcomeMessage": "Search normally, but keep out the channels and keywords you do not want in the house.",
+  // Use `1` for yes and `0` for no.
+  "simpleSettings": {
+    "allowSearching": 1,
+    "allowOnlyApprovedChannels": 0,
+    "allowOnlyApprovedVideos": 0,
+    "slowDownFastSwitching": 0
+  },
   "mode": "blocklist",
   // `label` = the button a child sees.
   // `searchFor` = the words Safe YouTube searches for when that button is tapped.

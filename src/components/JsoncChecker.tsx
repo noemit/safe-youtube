@@ -70,6 +70,54 @@ function parseErrorDetails(input: string, error: unknown): ParsedJsoncError {
   };
 }
 
+function isSimpleFlag(value: unknown): boolean {
+  if (typeof value === "boolean") {
+    return true;
+  }
+
+  if (typeof value === "number") {
+    return value === 0 || value === 1;
+  }
+
+  if (typeof value === "string") {
+    return ["0", "1", "false", "true", "no", "yes", "off", "on"].includes(
+      value.trim().toLowerCase(),
+    );
+  }
+
+  return false;
+}
+
+function readSimpleFlag(value: unknown): boolean | undefined {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "number") {
+    if (value === 1) {
+      return true;
+    }
+
+    if (value === 0) {
+      return false;
+    }
+  }
+
+  if (typeof value === "string") {
+    const normalized = value.trim().toLowerCase();
+
+    if (["1", "true", "yes", "on"].includes(normalized)) {
+      return true;
+    }
+
+    if (["0", "false", "no", "off"].includes(normalized)) {
+      return false;
+    }
+  }
+
+  return undefined;
+}
+
 function getConfigWarnings(parsed: unknown): string[] {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
     return [
@@ -78,6 +126,7 @@ function getConfigWarnings(parsed: unknown): string[] {
   }
 
   const config = parsed as {
+    simpleSettings?: unknown;
     mode?: unknown;
     categories?: unknown;
     featuredVideos?: unknown;
@@ -85,10 +134,66 @@ function getConfigWarnings(parsed: unknown): string[] {
     watchSuggestions?: unknown;
     blockedWords?: unknown;
     allowedChannels?: unknown;
+    allowedVideos?: unknown;
     watchExperience?: unknown;
     videoSwitchingControl?: unknown;
   };
   const warnings: string[] = [];
+
+  if (
+    config.simpleSettings !== undefined &&
+    (!config.simpleSettings ||
+      typeof config.simpleSettings !== "object" ||
+      Array.isArray(config.simpleSettings))
+  ) {
+    warnings.push("`simpleSettings` should be one object wrapped in `{` and `}`.");
+  }
+
+  if (
+    config.simpleSettings &&
+    typeof config.simpleSettings === "object" &&
+    !Array.isArray(config.simpleSettings)
+  ) {
+    const simpleSettings = config.simpleSettings as {
+      allowSearching?: unknown;
+      allowOnlyApprovedChannels?: unknown;
+      allowOnlyApprovedVideos?: unknown;
+      slowDownFastSwitching?: unknown;
+    };
+
+    for (const key of [
+      "allowSearching",
+      "allowOnlyApprovedChannels",
+      "allowOnlyApprovedVideos",
+      "slowDownFastSwitching",
+    ] as const) {
+      const value = simpleSettings[key];
+
+      if (value !== undefined && !isSimpleFlag(value)) {
+        warnings.push(
+          `\`simpleSettings.${key}\` should be \`1\` or \`0\` (or \`true\` / \`false\`).`,
+        );
+      }
+    }
+
+    if (
+      readSimpleFlag(simpleSettings.allowOnlyApprovedChannels) === true &&
+      (!Array.isArray(config.allowedChannels) || config.allowedChannels.length === 0)
+    ) {
+      warnings.push(
+        "Approved channels only is turned on, but `allowedChannels` is empty.",
+      );
+    }
+
+    if (
+      readSimpleFlag(simpleSettings.allowOnlyApprovedVideos) === true &&
+      (!Array.isArray(config.allowedVideos) || config.allowedVideos.length === 0)
+    ) {
+      warnings.push(
+        "Approved videos only is turned on, but `allowedVideos` is empty.",
+      );
+    }
+  }
 
   if (config.mode && config.mode !== "blocklist" && config.mode !== "allowlist") {
     warnings.push('`mode` should usually be `"blocklist"` or `"allowlist"`.');
@@ -132,6 +237,7 @@ function getConfigWarnings(parsed: unknown): string[] {
     "watchSuggestions",
     "blockedWords",
     "allowedChannels",
+    "allowedVideos",
   ] as const) {
     const value = config[listKey];
 
@@ -164,6 +270,12 @@ function getConfigWarnings(parsed: unknown): string[] {
 const EXAMPLE_TEXT = `{
   // Paste your Safe YouTube config here.
   "siteTitle": "Maya's Safe YouTube",
+  "simpleSettings": {
+    "allowSearching": 1,
+    "allowOnlyApprovedChannels": 0,
+    "allowOnlyApprovedVideos": 0,
+    "slowDownFastSwitching": 1
+  },
   "categories": [
     { "label": "🐘 Animals", "searchFor": "animals for kids" },
     { "label": "🎨 Drawing", "searchFor": "drawing for kids" }

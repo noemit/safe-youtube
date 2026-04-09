@@ -12,6 +12,12 @@ const DEFAULT_CONFIG: SiteConfig = {
     "A parent-friendly YouTube wrapper with common-sense controls for kids.",
   welcomeMessage:
     "Set safer search rules, approve good channels, and make video hopping less rewarding.",
+  simpleSettings: {
+    allowSearching: true,
+    allowOnlyApprovedChannels: false,
+    allowOnlyApprovedVideos: false,
+    slowDownFastSwitching: false,
+  },
   categories: [
     {
       label: "🐘 Animals",
@@ -141,6 +147,36 @@ function sanitizeBoolean(value: unknown, fallback: boolean): boolean {
   return value;
 }
 
+function sanitizeOptionalFlag(value: unknown): boolean | undefined {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "number") {
+    if (value === 1) {
+      return true;
+    }
+
+    if (value === 0) {
+      return false;
+    }
+  }
+
+  if (typeof value === "string") {
+    const normalized = value.trim().toLowerCase();
+
+    if (["1", "true", "yes", "on"].includes(normalized)) {
+      return true;
+    }
+
+    if (["0", "false", "no", "off"].includes(normalized)) {
+      return false;
+    }
+  }
+
+  return undefined;
+}
+
 function sanitizePositiveInteger(value: unknown, fallback: number): number {
   if (typeof value !== "number" || !Number.isFinite(value)) {
     return fallback;
@@ -162,12 +198,51 @@ function sanitizeNonNegativeInteger(value: unknown, fallback: number): number {
 function normalizeConfig(raw: unknown): SiteConfig {
   const source = raw && typeof raw === "object" ? raw : {};
   const config = source as Partial<SiteConfig> & {
+    simpleSettings?: {
+      allowSearching?: unknown;
+      allowOnlyApprovedChannels?: unknown;
+      allowOnlyApprovedVideos?: unknown;
+      slowDownFastSwitching?: unknown;
+    };
     watchExperience?: Partial<SiteConfig["watchExperience"]>;
     videoSwitchingControl?: Partial<SiteConfig["videoSwitchingControl"]>;
     theme?: Partial<SiteConfig["theme"]>;
   };
 
-  const mode = config.mode === "allowlist" ? "allowlist" : "blocklist";
+  const allowSearchingOverride = sanitizeOptionalFlag(
+    config.simpleSettings?.allowSearching,
+  );
+  const allowOnlyApprovedChannelsOverride = sanitizeOptionalFlag(
+    config.simpleSettings?.allowOnlyApprovedChannels,
+  );
+  const allowOnlyApprovedVideosOverride = sanitizeOptionalFlag(
+    config.simpleSettings?.allowOnlyApprovedVideos,
+  );
+  const slowDownFastSwitchingOverride = sanitizeOptionalFlag(
+    config.simpleSettings?.slowDownFastSwitching,
+  );
+  const simpleSettings = {
+    allowSearching:
+      allowSearchingOverride ?? DEFAULT_CONFIG.simpleSettings.allowSearching,
+    allowOnlyApprovedChannels:
+      allowOnlyApprovedChannelsOverride ??
+      DEFAULT_CONFIG.simpleSettings.allowOnlyApprovedChannels,
+    allowOnlyApprovedVideos:
+      allowOnlyApprovedVideosOverride ??
+      DEFAULT_CONFIG.simpleSettings.allowOnlyApprovedVideos,
+    slowDownFastSwitching:
+      slowDownFastSwitchingOverride ??
+      config.videoSwitchingControl?.enabled ??
+      DEFAULT_CONFIG.simpleSettings.slowDownFastSwitching,
+  };
+  const shouldUseSimpleAllowlist =
+    allowOnlyApprovedChannelsOverride === true ||
+    allowOnlyApprovedVideosOverride === true;
+  const mode = shouldUseSimpleAllowlist
+    ? "allowlist"
+    : config.mode === "allowlist"
+      ? "allowlist"
+      : "blocklist";
   const quickSearches = sanitizeTextArray(config.quickSearches);
   const hasCategories = Array.isArray(config.categories);
   const categories = hasCategories
@@ -178,6 +253,22 @@ function normalizeConfig(raw: unknown): SiteConfig {
           searchFor: term,
         }))
       : DEFAULT_CONFIG.categories;
+  const rawAllowedSearchTerms = sanitizeTextArray(config.allowedSearchTerms);
+  const rawAllowedChannels = sanitizeTextArray(config.allowedChannels);
+  const rawAllowedVideos = sanitizeTextArray(config.allowedVideos);
+  const allowedSearchTerms = shouldUseSimpleAllowlist ? [] : rawAllowedSearchTerms;
+  const allowedChannels =
+    allowOnlyApprovedChannelsOverride === true
+      ? rawAllowedChannels
+      : shouldUseSimpleAllowlist
+        ? []
+        : rawAllowedChannels;
+  const allowedVideos =
+    allowOnlyApprovedVideosOverride === true
+      ? rawAllowedVideos
+      : shouldUseSimpleAllowlist
+        ? []
+        : rawAllowedVideos;
 
   return {
     siteTitle: sanitizeText(config.siteTitle, DEFAULT_CONFIG.siteTitle),
@@ -189,6 +280,7 @@ function normalizeConfig(raw: unknown): SiteConfig {
       config.welcomeMessage,
       DEFAULT_CONFIG.welcomeMessage,
     ),
+    simpleSettings,
     categories,
     mode,
     quickSearches,
@@ -198,9 +290,9 @@ function normalizeConfig(raw: unknown): SiteConfig {
     blockedWords: sanitizeTextArray(config.blockedWords),
     blockedChannels: sanitizeTextArray(config.blockedChannels),
     blockedVideos: sanitizeTextArray(config.blockedVideos),
-    allowedSearchTerms: sanitizeTextArray(config.allowedSearchTerms),
-    allowedChannels: sanitizeTextArray(config.allowedChannels),
-    allowedVideos: sanitizeTextArray(config.allowedVideos),
+    allowedSearchTerms,
+    allowedChannels,
+    allowedVideos,
     watchExperience: {
       blockUnexpectedVideoChanges: sanitizeBoolean(
         config.watchExperience?.blockUnexpectedVideoChanges,
@@ -220,10 +312,12 @@ function normalizeConfig(raw: unknown): SiteConfig {
       ),
     },
     videoSwitchingControl: {
-      enabled: sanitizeBoolean(
-        config.videoSwitchingControl?.enabled,
-        DEFAULT_CONFIG.videoSwitchingControl.enabled,
-      ),
+      enabled:
+        slowDownFastSwitchingOverride ??
+        sanitizeBoolean(
+          config.videoSwitchingControl?.enabled,
+          DEFAULT_CONFIG.videoSwitchingControl.enabled,
+        ),
       mode:
         config.videoSwitchingControl?.mode === "confirm"
           ? "confirm"

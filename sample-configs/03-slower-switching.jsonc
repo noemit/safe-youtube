@@ -2,6 +2,13 @@
   "siteTitle": "Calm YouTube Time",
   "siteDescription": "A parent setup that allows browsing, but slows down rapid skipping.",
   "welcomeMessage": "Use parent-approved search rules, and make endless video hopping less rewarding.",
+  // Use `1` for yes and `0` for no.
+  "simpleSettings": {
+    "allowSearching": 1,
+    "allowOnlyApprovedChannels": 0,
+    "allowOnlyApprovedVideos": 0,
+    "slowDownFastSwitching": 1
+  },
   "mode": "blocklist",
   // `label` = the button a child sees.
   // `searchFor` = the words Safe YouTube searches for when that button is tapped.

@@ -12,6 +12,11 @@ Use them like this:
 
 These sample files are only starting points. You should still review the blocked words, channels, and videos yourself.
 
+At the top of each sample file, `simpleSettings` gives the easiest on/off switches.
+
+- `1` means yes
+- `0` means no
+
 In `categories`:
 
 - `label` is the text a child sees on the button

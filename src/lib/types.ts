@@ -11,6 +11,13 @@ export interface SearchCategory {
   searchFor: string;
 }
 
+export interface SimpleSettings {
+  allowSearching: boolean;
+  allowOnlyApprovedChannels: boolean;
+  allowOnlyApprovedVideos: boolean;
+  slowDownFastSwitching: boolean;
+}
+
 export interface WatchExperience {
   blockUnexpectedVideoChanges: boolean;
   revealSuggestionsAfterSeconds: number;
@@ -33,6 +40,7 @@ export interface SiteConfig {
   siteTitle: string;
   siteDescription: string;
   welcomeMessage: string;
+  simpleSettings: SimpleSettings;
   categories: SearchCategory[];
   mode: FilterMode;
   quickSearches: string[];

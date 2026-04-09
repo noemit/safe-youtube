@@ -12,8 +12,9 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
         <Link
           key={`${category.label}-${category.searchFor}`}
           className="category-card"
-          href={`/search?q=${encodeURIComponent(category.searchFor)}`}
-        >          <strong>{category.label}</strong>
+          href={`/search?q=${encodeURIComponent(category.searchFor)}&guided=1`}
+        >
+          <strong>{category.label}</strong>
         </Link>
       ))}
     </div>

@@ -10,6 +10,7 @@ type WatchPageProps = {
   }>;
   searchParams: Promise<{
     q?: string | string[];
+    guided?: string | string[];
   }>;
 };
 
@@ -32,7 +33,10 @@ export default async function WatchPage({
   ]);
   const videoId = extractVideoId(rawVideoId);
   const query = readQueryValue(resolvedSearchParams.q).trim();
-  const backHref = query ? `/search?q=${encodeURIComponent(query)}` : "/";
+  const guidedSearch = readQueryValue(resolvedSearchParams.guided).trim() === "1";
+  const backHref = query
+    ? `/search?q=${encodeURIComponent(query)}${guidedSearch ? "&guided=1" : ""}`
+    : "/";
 
   if (!videoId) {
     return (

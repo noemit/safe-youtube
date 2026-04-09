@@ -2,6 +2,13 @@
   "siteTitle": "Only These Videos",
   "siteDescription": "A locked-down setup that only shows exact videos chosen by a parent.",
   "welcomeMessage": "Replace the sample video links below with the exact YouTube videos you want to allow.",
+  // Use `1` for yes and `0` for no.
+  "simpleSettings": {
+    "allowSearching": 0,
+    "allowOnlyApprovedChannels": 0,
+    "allowOnlyApprovedVideos": 1,
+    "slowDownFastSwitching": 1
+  },
   "mode": "allowlist",
   "categories": [],
   "featuredVideos": [

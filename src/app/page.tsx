@@ -12,6 +12,7 @@ export default async function HomePage() {
     getFeaturedVideos(config.featuredVideos),
     getFeaturedChannels(config.featuredChannels),
   ]);
+  const allowSearching = config.simpleSettings.allowSearching;
   const modeLabel =
     config.mode === "allowlist" ? "Allowlist mode" : "Blocklist mode";
 
@@ -21,7 +22,13 @@ export default async function HomePage() {
         <div className="hero__copy">
           <h1>{config.siteTitle}</h1>
           <p>{config.welcomeMessage}</p>
-          <SearchForm />
+          <SearchForm disabled={!allowSearching} />
+          {!allowSearching ? (
+            <p className="helper-text">
+              Typing search is off. Kids can still use the topic buttons and
+              trusted channels below.
+            </p>
+          ) : null}
         </div>
       </section>
 
@@ -46,7 +53,7 @@ export default async function HomePage() {
               <Link
                 key={channel.raw}
                 className="channel-card"
-                href={`/search?q=${encodeURIComponent(channel.searchQuery)}`}
+                href={`/search?q=${encodeURIComponent(channel.searchQuery)}&guided=1`}
               >
                 <div className="channel-card__top">
                   {channel.thumbnailUrl ? (

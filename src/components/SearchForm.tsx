@@ -1,11 +1,13 @@
 interface SearchFormProps {
   action?: string;
   defaultValue?: string;
+  disabled?: boolean;
 }
 
 export function SearchForm({
   action = "/search",
   defaultValue = "",
+  disabled = false,
 }: SearchFormProps) {
   return (
     <form action={action} className="search-form">
@@ -17,11 +19,15 @@ export function SearchForm({
         name="q"
         type="search"
         defaultValue={defaultValue}
-        placeholder="Search YouTube"
+        disabled={disabled}
+        placeholder={
+          disabled ? "Typing search is turned off by parent" : "Search YouTube"
+        }
         autoComplete="off"
       />
-      <button type="submit">Search</button>
+      <button disabled={disabled} type="submit">
+        Search
+      </button>
     </form>
   );
 }
-

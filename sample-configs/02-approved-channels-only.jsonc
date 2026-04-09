@@ -2,6 +2,13 @@
   "siteTitle": "Approved Channels Only",
   "siteDescription": "A stricter Safe YouTube setup for younger kids.",
   "welcomeMessage": "This version only shows videos from trusted channels picked by a parent.",
+  // Use `1` for yes and `0` for no.
+  "simpleSettings": {
+    "allowSearching": 1,
+    "allowOnlyApprovedChannels": 1,
+    "allowOnlyApprovedVideos": 0,
+    "slowDownFastSwitching": 1
+  },
   "mode": "allowlist",
   // `label` = the button a child sees.
   // `searchFor` = the words Safe YouTube searches for when that button is tapped.
@@ -20,13 +27,7 @@
   "blockedWords": ["horror", "gore", "violence", "prank"],
   "blockedChannels": [],
   "blockedVideos": [],
-  "allowedSearchTerms": [
-    "science",
-    "drawing",
-    "phonics",
-    "animals",
-    "nature"
-  ],
+  "allowedSearchTerms": [],
   "allowedChannels": [
     "SciShow Kids",
     "Art for Kids Hub",

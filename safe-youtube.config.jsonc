@@ -8,6 +8,26 @@
   // This text appears near the main search box.
   "welcomeMessage": "Set safer search rules, approve good channels, and make video hopping less rewarding.",
 
+  // EASY SWITCHES
+  // Use `1` for yes and `0` for no.
+  // These are the main controls most parents will want to change first.
+  "simpleSettings": {
+    // `1` = show the typing search box.
+    // `0` = hide typing search. Topic buttons and trusted channels still work.
+    "allowSearching": 1,
+
+    // `1` = only allow videos from `allowedChannels` below.
+    // Add approved channels to `allowedChannels` first.
+    "allowOnlyApprovedChannels": 0,
+
+    // `1` = only allow the exact video links in `allowedVideos` below.
+    // Add approved video links first, or the app may feel empty.
+    "allowOnlyApprovedVideos": 0,
+
+    // `1` = turn on the pause that slows down fast video hopping.
+    "slowDownFastSwitching": 0
+  },
+
   // These big buttons appear on the home screen.
   // When a child taps one, the app runs a YouTube search using the words in `searchFor`.
   // `label` = what the child sees on the button.
@@ -33,7 +53,10 @@
     }
   ],
 
-  // Choose one:
+  // ADVANCED FILTER MODE
+  // Most parents can leave this alone and use the easy switches above.
+  // If one of the `allowOnlyApproved...` switches above is `1`,
+  // the app will use allowlist behavior automatically.
   // "blocklist" = hide anything that matches your blocked words, channels, or videos.
   // "allowlist" = only show approved topics, approved channels, or approved videos.
   "mode": "blocklist",
@@ -75,12 +98,14 @@
   // Leave this empty if you only want to approve by channel or video.
   "allowedSearchTerms": [],
 
-  // Only show videos from these channels.
+  // These channels are used when `simpleSettings.allowOnlyApprovedChannels` is `1`,
+  // or when you choose advanced `allowlist` mode.
   "allowedChannels": [
     "@desene-animate-romana-tralala"
   ],
 
-  // Only show these exact videos.
+  // These exact video links are used when `simpleSettings.allowOnlyApprovedVideos` is `1`,
+  // or when you choose advanced `allowlist` mode.
   "allowedVideos": [],
 
   // WATCH EXPERIENCE
@@ -100,10 +125,10 @@
   },
 
   // RAPID VIDEO SWITCHING CONTROL
-  // Turn this on if you want to make fast video-hopping less rewarding.
-  // After too many switches in a short time, the next video is paused.
+  // The easy switch above is the simplest way to turn this on or off.
+  // These settings control how the pause behaves.
   "videoSwitchingControl": {
-    // false = off
+    // Advanced on/off switch. Most parents can use `simpleSettings.slowDownFastSwitching` instead.
     "enabled": false,
 
     // "cooldown" = wait, then the video opens automatically.

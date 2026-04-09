@@ -7,15 +7,18 @@ type VideoCardData = SearchResult | FeaturedVideo;
 interface VideoCardProps {
   data: VideoCardData;
   query?: string;
+  guided?: boolean;
 }
 
 function isSearchResult(data: VideoCardData): data is SearchResult {
   return "description" in data;
 }
 
-export function VideoCard({ data, query }: VideoCardProps) {
+export function VideoCard({ data, guided = false, query }: VideoCardProps) {
   const watchHref = query
-    ? `/watch/${data.videoId}?q=${encodeURIComponent(query)}`
+    ? `/watch/${data.videoId}?q=${encodeURIComponent(query)}${
+        guided ? "&guided=1" : ""
+      }`
     : `/watch/${data.videoId}`;
 
   return (
