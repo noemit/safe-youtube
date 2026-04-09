@@ -12,3 +12,4 @@ Use them like this:
 
 These sample files are only starting points. You should still review the blocked words, channels, and videos yourself.
 
+Emoji labels in `categories` are fine and can make topic buttons easier for younger kids to recognize.

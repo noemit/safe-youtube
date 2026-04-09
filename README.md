@@ -31,7 +31,7 @@ You control the rules in `safe-youtube.config.jsonc`.
 
 That file can do all of this:
 
-- `categories`: big home-screen buttons that parents define in the config
+- `categories`: big home-screen buttons that parents define in the config, including optional emoji labels
 - `blocklist` mode: normal search, but hide results that match blocked words, channels, or videos
 - `allowlist` mode: only show approved searches, approved channels, or approved videos
 - feature trusted channels on the home page
@@ -361,9 +361,9 @@ If you want the smallest possible first change, edit just these fields:
 ```jsonc
 "siteTitle": "Maya's Safe YouTube",
 "categories": [
-  { "label": "Animals", "query": "animals for kids" },
-  { "label": "Drawing", "query": "drawing for kids" },
-  { "label": "Space", "query": "space for kids" }
+  { "label": "🐘 Animals", "query": "animals for kids" },
+  { "label": "🎨 Drawing", "query": "drawing for kids" },
+  { "label": "🚀 Space", "query": "space for kids" }
 ],
 "mode": "blocklist",
 "blockedWords": ["horror", "violence", "prank"],

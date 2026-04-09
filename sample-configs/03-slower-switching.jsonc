@@ -4,10 +4,10 @@
   "welcomeMessage": "Use parent-approved search rules, and make endless video hopping less rewarding.",
   "mode": "blocklist",
   "categories": [
-    { "label": "Stories", "query": "bedtime stories for kids" },
-    { "label": "Music", "query": "sleep music for kids" },
-    { "label": "Breathing", "query": "guided breathing for children" },
-    { "label": "Drawing", "query": "calm drawing tutorial" }
+    { "label": "📚 Stories", "query": "bedtime stories for kids" },
+    { "label": "🎵 Music", "query": "sleep music for kids" },
+    { "label": "🌬️ Breathing", "query": "guided breathing for children" },
+    { "label": "🎨 Drawing", "query": "calm drawing tutorial" }
   ],
   "featuredVideos": [],
   "featuredChannels": [

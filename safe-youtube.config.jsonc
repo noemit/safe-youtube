@@ -10,21 +10,22 @@
 
   // These big buttons appear on the home screen.
   // Keep the labels short so young readers can understand them easily.
+  // Emojis are fine here and can make the topics easier to spot.
   "categories": [
     {
-      "label": "Animals",
+      "label": "🐘 Animals",
       "query": "animal facts for kids"
     },
     {
-      "label": "Space",
+      "label": "🚀 Space",
       "query": "space documentary for kids"
     },
     {
-      "label": "Drawing",
+      "label": "🎨 Drawing",
       "query": "drawing tutorial for beginners"
     },
     {
-      "label": "Lego",
+      "label": "🧱 Lego",
       "query": "lego building ideas"
     }
   ],

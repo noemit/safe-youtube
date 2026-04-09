@@ -4,10 +4,10 @@
   "welcomeMessage": "This version only shows videos from trusted channels picked by a parent.",
   "mode": "allowlist",
   "categories": [
-    { "label": "Science", "query": "science for kids" },
-    { "label": "Drawing", "query": "drawing for kids" },
-    { "label": "Phonics", "query": "phonics songs" },
-    { "label": "Nature", "query": "nature for kids" }
+    { "label": "🧪 Science", "query": "science for kids" },
+    { "label": "🎨 Drawing", "query": "drawing for kids" },
+    { "label": "🔤 Phonics", "query": "phonics songs" },
+    { "label": "🌿 Nature", "query": "nature for kids" }
   ],
   "featuredVideos": [],
   "featuredChannels": [

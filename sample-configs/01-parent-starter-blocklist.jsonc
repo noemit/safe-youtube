@@ -4,10 +4,10 @@
   "welcomeMessage": "Search normally, but keep out the channels and keywords you do not want in the house.",
   "mode": "blocklist",
   "categories": [
-    { "label": "Animals", "query": "animal facts for kids" },
-    { "label": "Crafts", "query": "easy crafts for kids" },
-    { "label": "Lego", "query": "lego building ideas" },
-    { "label": "Science", "query": "science experiments for kids" }
+    { "label": "🐘 Animals", "query": "animal facts for kids" },
+    { "label": "✂️ Crafts", "query": "easy crafts for kids" },
+    { "label": "🧱 Lego", "query": "lego building ideas" },
+    { "label": "🧪 Science", "query": "science experiments for kids" }
   ],
   "featuredVideos": [],
   "featuredChannels": [

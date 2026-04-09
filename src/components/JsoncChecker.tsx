@@ -154,8 +154,8 @@ const EXAMPLE_TEXT = `{
   // Paste your Safe YouTube config here.
   "siteTitle": "Maya's Safe YouTube",
   "categories": [
-    { "label": "Animals", "query": "animals for kids" },
-    { "label": "Drawing", "query": "drawing for kids" }
+    { "label": "🐘 Animals", "query": "animals for kids" },
+    { "label": "🎨 Drawing", "query": "drawing for kids" }
   ],
   "watchSuggestions": [
     "https://www.youtube.com/watch?v=VIDEO_ID_1"

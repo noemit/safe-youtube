@@ -14,19 +14,19 @@ const DEFAULT_CONFIG: SiteConfig = {
     "Set safer search rules, approve good channels, and make video hopping less rewarding.",
   categories: [
     {
-      label: "Animals",
+      label: "🐘 Animals",
       query: "animal facts for kids",
     },
     {
-      label: "Space",
+      label: "🚀 Space",
       query: "space documentary for kids",
     },
     {
-      label: "Drawing",
+      label: "🎨 Drawing",
       query: "drawing tutorial for beginners",
     },
     {
-      label: "Lego",
+      label: "🧱 Lego",
       query: "lego building ideas",
     },
   ],
