@@ -1,4 +1,4 @@
-import { HomeButton } from "@/components/HomeButton";
+import { StickyTopNav } from "@/components/StickyTopNav";
 import { WatchPlayer } from "@/components/WatchPlayer";
 import { getSiteConfig } from "@/lib/config";
 import { filterSearchResults, extractVideoId } from "@/lib/filters";
@@ -8,24 +8,40 @@ type WatchPageProps = {
   params: Promise<{
     videoId: string;
   }>;
+  searchParams: Promise<{
+    q?: string | string[];
+  }>;
 };
+
+function readQueryValue(value: string | string[] | undefined): string {
+  if (Array.isArray(value)) {
+    return value[0] ?? "";
+  }
+
+  return value ?? "";
+}
 
 export default async function WatchPage({
   params,
+  searchParams,
 }: WatchPageProps) {
-  const [{ videoId: rawVideoId }, config] = await Promise.all([
+  const [{ videoId: rawVideoId }, resolvedSearchParams, config] = await Promise.all([
     params,
+    searchParams,
     getSiteConfig(),
   ]);
   const videoId = extractVideoId(rawVideoId);
+  const query = readQueryValue(resolvedSearchParams.q).trim();
+  const backHref = query ? `/search?q=${encodeURIComponent(query)}` : "/";
 
   if (!videoId) {
     return (
       <main className="shell shell--compact">
+        <StickyTopNav backHref={backHref} />
+
         <section className="empty-card">
           <h1>Video not found</h1>
           <p>The video link is not valid.</p>
-          <HomeButton />
         </section>
       </main>
     );
@@ -49,13 +65,14 @@ export default async function WatchPage({
   if (!canShowVideo) {
     return (
       <main className="shell shell--compact">
+        <StickyTopNav backHref={backHref} />
+
         <section className="empty-card">
           <h1>This video is blocked</h1>
           <p>
             The current rules in <code>safe-youtube.config.jsonc</code> do not
             allow this video.
           </p>
-          <HomeButton />
         </section>
       </main>
     );
@@ -63,6 +80,8 @@ export default async function WatchPage({
 
   return (
     <main className="shell shell--compact">
+      <StickyTopNav backHref={backHref} />
+
       <section className="watch-header">
         <div>
           <span className="eyebrow">Watching</span>
@@ -75,8 +94,6 @@ export default async function WatchPage({
             </p>
           ) : null}
         </div>
-
-        <HomeButton />
       </section>
 
       <WatchPlayer

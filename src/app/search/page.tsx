@@ -1,6 +1,6 @@
 import { CategoryGrid } from "@/components/CategoryGrid";
-import { HomeButton } from "@/components/HomeButton";
 import { SearchForm } from "@/components/SearchForm";
+import { StickyTopNav } from "@/components/StickyTopNav";
 import { VideoCard } from "@/components/VideoCard";
 import { getSiteConfig } from "@/lib/config";
 import { filterSearchResults, isQueryAllowed } from "@/lib/filters";
@@ -62,6 +62,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <main className="shell shell--compact">
+      <StickyTopNav backHref="/" />
+
       <section className="page-banner card">
         <div>
           <span className="eyebrow">Search</span>
@@ -73,7 +75,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         </div>
         <div className="page-banner__actions">
           <SearchForm defaultValue={query} />
-          <HomeButton />
         </div>
       </section>
 
