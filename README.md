@@ -1,17 +1,8 @@
 # Safe YouTube
 
-Safe YouTube is a simple Next.js app for parents who want better common-sense parental controls for YouTube.
+Safe YouTube is a Youtube app replacement for parents who want better common-sense parental controls for YouTube.
 
-It is meant for one job:
-
-1. Fork the repo
-2. Edit one friendly config file
-3. Deploy it to Vercel for free
-4. Open it on an iPad as a PWA
-
-You do not need a database.
-You do not need a YouTube API key.
-You do not need to be technical to use the basic setup.
+You deploy it yourself for free. You don't need to sign up. You don't need a database. You do not need to be technical to use the basic setup.
 
 ## Who This Is For
 
