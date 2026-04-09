@@ -48,7 +48,8 @@
     "@SLICKSLIMESAMDIYComedyScience",
     "@Blippi",
     "@Numberblocks",
-    "@NumberjacksTV"
+    "@NumberjacksTV",
+    "@desene-animate-romana-tralala"
   ],
 
   // Optional: these approved videos can appear below the player and be used
@@ -72,7 +73,9 @@
   "allowedSearchTerms": [],
 
   // Only show videos from these channels.
-  "allowedChannels": [],
+  "allowedChannels": [
+    "@desene-animate-romana-tralala"
+  ],
 
   // Only show these exact videos.
   "allowedVideos": [],
