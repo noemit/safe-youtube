@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WatchPlayer } from "@/components/WatchPlayer";
 import { getSiteConfig } from "@/lib/config";
 import { filterSearchResults, extractVideoId } from "@/lib/filters";
 import { getVideoPreview } from "@/lib/youtube";
@@ -80,6 +81,12 @@ export default async function WatchPage({
           <span className="eyebrow">Watching</span>
           <h1>{preview?.title ?? "YouTube video"}</h1>
           <p>{preview?.channelTitle ?? "Approved content"}</p>
+          {config.videoSwitchingControl.enabled ? (
+            <p className="watch-note">
+              Rapid-switch guard is on. If a child jumps between too many
+              videos too quickly, the next video pauses for a moment.
+            </p>
+          ) : null}
         </div>
 
         <div className="pill-row">
@@ -95,18 +102,12 @@ export default async function WatchPage({
       </section>
 
       <section className="player-card">
-        <div className="player-frame">
-          <iframe
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
-            title={preview?.title ?? "YouTube video"}
-          />
-        </div>
+        <WatchPlayer
+          control={config.videoSwitchingControl}
+          title={preview?.title ?? "YouTube video"}
+          videoId={videoId}
+        />
       </section>
     </main>
   );
 }
-

@@ -1,225 +1,308 @@
 # Safe YouTube
 
-Safe YouTube is a simple Next.js web app that acts like a filtered YouTube wrapper.
+Safe YouTube is a simple Next.js app for parents who want better common-sense parental controls for YouTube.
 
-You do **not** need a database.
-You do **not** need a YouTube API key.
-You do **not** need to install coding tools on your computer if you only want to:
+It is meant for one job:
 
 1. Fork the repo
-2. Edit one config file
-3. Deploy it to Vercel
+2. Edit one friendly config file
+3. Deploy it to Vercel for free
+4. Open it on an iPad as a PWA
 
-It also works as a PWA, so you can add it to an iPad home screen and open it like an app.
+You do not need a database.
+You do not need a YouTube API key.
+You do not need to be technical to use the basic setup.
 
-## What This Is Good For
+## Who This Is For
 
-- Families who want a calmer version of YouTube
-- Teachers who want a school-safe search page
-- Therapists or caregivers who want a small list of approved videos or channels
-- Anyone who wants a free and easy deploy on Vercel
+This project is mainly for parents who want to:
 
-## The Only File Most People Need To Edit
+- block obvious garbage by keyword
+- only allow trusted channels
+- only allow exact videos
+- make rapid video-hopping less rewarding
+- deploy a private family version without building a complicated system
+
+## The Main Idea
+
+Instead of giving a child normal YouTube, this app gives them a filtered wrapper.
+
+You control the rules in `safe-youtube.config.jsonc`.
+
+That file can do all of this:
+
+- `blocklist` mode: normal search, but hide results that match blocked words, channels, or videos
+- `allowlist` mode: only show approved searches, approved channels, or approved videos
+- feature trusted channels on the home page
+- feature parent-picked videos on the home page
+- turn on a rapid-switch guard that slows down constant video hopping
+
+## The Only File Most Parents Need To Edit
 
 The main file is:
 
 `safe-youtube.config.jsonc`
 
-That file controls:
+It uses `jsonc`, which means it can include comments. The comments inside the file explain what each setting does in plain language.
 
-- The app title
-- The welcome message
-- Quick search buttons
-- Blocked words
-- Blocked channels
-- Blocked videos
-- Allowed search terms
-- Allowed channels
-- Allowed videos
-- Featured videos on the home page
-- Featured channels on the home page
+## Start With A Preset
 
-`jsonc` means it is like JSON, but with comments. The comments inside the file explain what each setting does.
+This repo includes ready-made sample configs in `sample-configs/`.
+
+Available presets:
+
+- `sample-configs/01-parent-starter-blocklist.jsonc`
+- `sample-configs/02-approved-channels-only.jsonc`
+- `sample-configs/03-slower-switching.jsonc`
+- `sample-configs/04-exact-videos-only.jsonc`
+
+If you do not want to start from scratch:
+
+1. Open one of the files in `sample-configs/`
+2. Copy everything in it
+3. Paste it into `safe-youtube.config.jsonc`
+4. Change the text, channels, words, or video links to fit your child
 
 ## Fastest Setup
 
-If you want the easiest possible path:
+If you want the shortest path:
 
-1. Fork this repo on GitHub.
-2. Edit `safe-youtube.config.jsonc` in the GitHub website.
-3. Import your fork into Vercel.
-4. Click deploy.
-5. Open the site on your iPad in Safari.
-6. Use **Share** -> **Add to Home Screen**.
+1. Fork this repo on GitHub
+2. Copy one preset from `sample-configs/` into `safe-youtube.config.jsonc`
+3. Edit the words, channels, or videos
+4. Import your fork into Vercel
+5. Click Deploy
+6. Open the site on the iPad in Safari
+7. Use Share -> Add to Home Screen
 
-## Step By Step For Non-Technical Users
+## Step By Step For Non-Technical Parents
 
 ### 1. Fork The Repo
 
-1. Open this repository on GitHub.
-2. Near the top right, click **Fork**.
-3. Keep the default options unless you know you want something different.
-4. Wait for GitHub to create your own copy.
+1. Open this repository on GitHub
+2. Click **Fork** in the top right
+3. Keep the default options unless you know you want something different
+4. Wait for GitHub to create your own copy
 
 After that, you will have your own version of the project in your GitHub account.
 
-### 2. Edit The Config File On GitHub
+### 2. Pick A Sample Config Or Use The Default One
 
-1. In your fork, open `safe-youtube.config.jsonc`.
-2. Click the pencil icon to edit it.
-3. Change the text and lists you want.
-4. Scroll down and save the file with the default commit form.
+If you want a head start:
 
-You usually only need to edit the words inside quotes or add new lines inside the lists.
+1. Open the `sample-configs` folder in your fork
+2. Pick the sample that is closest to what you want
+3. Open that file
+4. Copy everything in it
+5. Open `safe-youtube.config.jsonc`
+6. Replace its contents with the sample you copied
 
-### 3. Choose A Filter Style
+If you prefer, you can skip this and just edit `safe-youtube.config.jsonc` directly.
 
-There are two main modes.
+### 3. Edit The Config File On GitHub
 
-#### Option A: `blocklist`
+1. Open `safe-youtube.config.jsonc`
+2. Click the pencil icon
+3. Change the values you want
+4. Scroll down and save the file
 
-Use this if you want normal YouTube searching, but with some content hidden.
+In most cases, you only need to:
+
+- change words inside quotes
+- add or remove lines inside lists
+- switch between `blocklist` and `allowlist`
+- turn the rapid-switch guard on or off
+
+### 4. Deploy To Vercel For Free
+
+1. Go to Vercel
+2. Sign in with GitHub
+3. Click **Add New** and then **Project**
+4. Choose your fork of this repository
+5. Leave the default settings alone unless you already know you need something different
+6. Click **Deploy**
+7. Wait for the first deployment to finish
+8. Open the live URL Vercel gives you
+
+There are no environment variables required for the default setup.
+
+### 5. Add It To The iPad Home Screen
+
+1. Open your deployed site in Safari on the iPad
+2. Tap the Share button
+3. Tap **Add to Home Screen**
+4. Open it from the new icon
+
+It will feel more like an app and less like a normal browser tab.
+
+## Two Main Filtering Styles
+
+### Option A: `blocklist`
+
+Use this if you want YouTube search to feel mostly normal, but with obvious junk filtered out.
 
 Example:
 
 ```jsonc
 "mode": "blocklist",
 "blockedWords": ["horror", "gore", "violence", "prank"],
-"blockedChannels": ["@SomeChannel"],
+"blockedChannels": [],
 "blockedVideos": []
 ```
 
 What it does:
 
-- Search still works normally
-- Results are hidden if they match blocked words
-- Results are hidden if they come from blocked channels
-- Results are hidden if they match blocked video IDs or links
+- lets the child search normally
+- hides results that match blocked words
+- hides results from blocked channels
+- hides exact blocked videos
 
-#### Option B: `allowlist`
+### Option B: `allowlist`
 
-Use this if you want the strictest setup.
+Use this if you want the stricter approach.
 
 Example:
 
 ```jsonc
 "mode": "allowlist",
 "allowedSearchTerms": ["animals", "space", "drawing"],
-"allowedChannels": ["@SciShowKids", "@ArtforKidsHub"],
-"allowedVideos": [
-  "https://www.youtube.com/watch?v=VIDEO_ID_HERE"
-]
+"allowedChannels": ["SciShow Kids", "Art for Kids Hub"],
+"allowedVideos": []
 ```
 
 What it does:
 
-- Only approved content is shown
-- You can approve by topic, by channel, by exact video, or all three
-- This is the safest option if you only want a narrow set of results
+- only shows approved content
+- can approve by topic, by channel, by exact video, or all three
+- works well for younger kids
+
+## Rapid Video Switching Guard
+
+This is the extra behavior you asked for to discourage constant video-hopping.
+
+The config block is:
+
+```jsonc
+"videoSwitchingControl": {
+  "enabled": true,
+  "mode": "confirm",
+  "maxSwitchesInWindow": 2,
+  "windowSeconds": 180,
+  "cooldownSeconds": 25,
+  "title": "Take a breath before the next video",
+  "message": "This parent setting adds a calm pause when videos are switched too quickly.",
+  "buttonText": "Open the next video"
+}
+```
+
+What the settings mean:
+
+- `enabled`: turns the feature on or off
+- `mode: "cooldown"`: after the pause, the video opens automatically
+- `mode: "confirm"`: after the pause, the child must tap a button to continue
+- `maxSwitchesInWindow`: how many quick switches are allowed before the pause starts
+- `windowSeconds`: how far back the app looks when counting switches
+- `cooldownSeconds`: how long the pause lasts
+- `title`, `message`, `buttonText`: the text shown during the pause screen
+
+Practical advice:
+
+- use `cooldown` if you want something gentle
+- use `confirm` if you want rapid switching to feel more annoying and less rewarding
+- start with a short pause like 15 or 20 seconds
 
 ## What Each Setting Means
 
 Inside `safe-youtube.config.jsonc`:
 
-- `siteTitle`: The app name.
-- `siteDescription`: Short description for the browser and home screen.
-- `welcomeMessage`: Text shown on the home page.
-- `mode`: Either `"blocklist"` or `"allowlist"`.
-- `quickSearches`: Buttons shown on the home page for one-tap searches.
-- `featuredVideos`: Full YouTube links you want to pin on the home page.
-- `featuredChannels`: Channel handles, names, or full URLs you want to feature.
-- `blockedWords`: Hide any result whose title, description, or channel matches these terms.
-- `blockedChannels`: Hide results from these channels.
-- `blockedVideos`: Hide exact videos by link or by YouTube video ID.
-- `allowedSearchTerms`: In allowlist mode, only searches matching these terms are allowed.
-- `allowedChannels`: In allowlist mode, only videos from these channels are allowed.
-- `allowedVideos`: In allowlist mode, only these exact videos are allowed.
-- `theme.accentColor`: Main button color.
-- `theme.accentTint`: Soft accent background color.
+- `siteTitle`: the app name
+- `siteDescription`: short browser and home-screen description
+- `welcomeMessage`: text shown on the home page
+- `mode`: `"blocklist"` or `"allowlist"`
+- `quickSearches`: one-tap search buttons on the home page
+- `featuredVideos`: full YouTube links shown on the home page
+- `featuredChannels`: trusted channels shown on the home page
+- `blockedWords`: hide results whose title, description, or channel matches these terms
+- `blockedChannels`: hide results from these channels
+- `blockedVideos`: hide exact videos by link or video ID
+- `allowedSearchTerms`: in allowlist mode, only searches matching these terms are allowed
+- `allowedChannels`: in allowlist mode, only videos from these channels are allowed
+- `allowedVideos`: in allowlist mode, only these exact videos are allowed
+- `videoSwitchingControl`: slows rapid switching between videos
+- `theme.accentColor`: main button color
+- `theme.accentTint`: softer accent color
 
-## Easy Copy-Paste Examples
+## Good Starter Setups
 
-### Family-Safe Example
+### Everyday Family Starter
 
-```jsonc
-"mode": "blocklist",
-"blockedWords": ["prank", "horror", "gore", "violence", "politics"],
-"blockedChannels": [],
-"blockedVideos": [],
-"quickSearches": ["animal facts", "drawing for kids", "space for kids"]
-```
+Use:
 
-### School Example
+- `sample-configs/01-parent-starter-blocklist.jsonc`
 
-```jsonc
-"mode": "allowlist",
-"allowedSearchTerms": ["math", "science", "phonics", "geography"],
-"allowedChannels": ["@SciShowKids"],
-"allowedVideos": [],
-"featuredChannels": ["@SciShowKids"]
-```
+This is good if you want:
 
-### Pure Curated Home Screen Example
+- a normal search box
+- some obvious junk blocked
+- a few trusted channels featured
 
-```jsonc
-"mode": "allowlist",
-"allowedSearchTerms": [],
-"allowedChannels": [],
-"allowedVideos": [
-  "https://www.youtube.com/watch?v=VIDEO_ID_1",
-  "https://www.youtube.com/watch?v=VIDEO_ID_2"
-],
-"featuredVideos": [
-  "https://www.youtube.com/watch?v=VIDEO_ID_1",
-  "https://www.youtube.com/watch?v=VIDEO_ID_2"
-]
-```
+### Younger Kids Or Tighter Rules
 
-## Deploy To Vercel For Free
+Use:
 
-Once your config file looks right:
+- `sample-configs/02-approved-channels-only.jsonc`
 
-1. Go to Vercel.
-2. Sign in with GitHub.
-3. Click **Add New** and then **Project**.
-4. Choose your fork of this repository.
-5. Leave the default project settings alone unless you already know you need something different.
-6. Click **Deploy**.
-7. Wait for the first deployment to finish.
-8. Open the live URL Vercel gives you.
+This is good if you want:
 
-That is enough for most people. There are no environment variables required for the default setup.
+- only trusted channels
+- topic approval
+- a mild rapid-switch pause
 
-## Add It To An iPad Home Screen
+### Calm Mode Or Bedtime Mode
 
-1. Open your deployed site in **Safari** on the iPad.
-2. Tap the **Share** button.
-3. Tap **Add to Home Screen**.
-4. Open it from the new icon on the home screen.
+Use:
 
-It will behave more like an app and less like a normal browser tab.
+- `sample-configs/03-slower-switching.jsonc`
 
-## How To Update It Later
+This is good if you want:
 
-When you want to change the rules later:
+- calmer search terms
+- stricter switching friction
+- a gentler feel overall
 
-1. Open your fork on GitHub.
-2. Edit `safe-youtube.config.jsonc`.
-3. Save the change.
-4. Wait for Vercel to redeploy the site.
+### Exact Videos Only
+
+Use:
+
+- `sample-configs/04-exact-videos-only.jsonc`
+
+This is good if you want:
+
+- no open browsing
+- only a small list of exact videos
+- the tightest setup
+
+## Updating The Rules Later
+
+When you want to change the app later:
+
+1. Open your fork on GitHub
+2. Edit `safe-youtube.config.jsonc`
+3. Save the change
+4. Wait for Vercel to redeploy
 
 That is the normal maintenance flow.
 
-## If You Want To Work Locally
+## Running It Locally
 
-If you do want to run it on your own computer:
+If you want to run it on your own computer:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Then open `http://localhost:3000`
 
 To test a production build:
 
@@ -230,20 +313,31 @@ npm start
 
 ## Project Notes
 
-- The app reads your rules from `safe-youtube.config.jsonc`.
-- Search results are filtered on the server before they are shown.
-- The app includes a manifest and service worker so it can behave like a PWA.
-- The watch page also respects the current rules, so direct links are still filtered.
+- the app reads its rules from `safe-youtube.config.jsonc`
+- search results are filtered before they are shown
+- the watch page also respects the rules, so direct video links are still checked
+- the rapid-switch guard runs in the browser so it can react to how quickly a child opens new videos
+- the app includes a manifest and service worker so it can be added to an iPad home screen
 
-## Good First Change
+## Good First Edit
 
-If you are not sure where to start, edit only these fields first:
+If you want the smallest possible first change, edit just these fields:
 
 ```jsonc
-"siteTitle": "My Safe YouTube",
+"siteTitle": "Maya's Safe YouTube",
 "mode": "blocklist",
 "blockedWords": ["horror", "violence", "prank"],
-"quickSearches": ["animals", "drawing", "space"]
+"quickSearches": ["animals", "drawing", "space"],
+"videoSwitchingControl": {
+  "enabled": true,
+  "mode": "cooldown",
+  "maxSwitchesInWindow": 3,
+  "windowSeconds": 180,
+  "cooldownSeconds": 15,
+  "title": "Pause before the next video",
+  "message": "Fast switching can make YouTube harder to stop. Take a short pause before opening another video.",
+  "buttonText": "Continue to the video"
+}
 ```
 
-That is enough to get a first version online quickly.
+That is enough to get a useful first version online.

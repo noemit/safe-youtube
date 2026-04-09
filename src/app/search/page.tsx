@@ -64,10 +64,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <section className="page-banner card">
         <div>
           <span className="eyebrow">Search</span>
-          <h1>Filtered YouTube Search</h1>
+          <h1>Parent-Filtered YouTube Search</h1>
           <p>
-            Type a search the usual way. This app will apply the rules from your
-            config file before showing any results.
+            Kids can search the usual way. This app applies the family rules
+            from your config file before showing any results.
           </p>
         </div>
         <SearchForm defaultValue={query} />

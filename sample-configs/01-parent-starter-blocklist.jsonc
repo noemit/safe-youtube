@@ -1,0 +1,46 @@
+{
+  "siteTitle": "Kids Safe YouTube",
+  "siteDescription": "A calmer YouTube setup for everyday family use.",
+  "welcomeMessage": "Search normally, but keep out the channels and keywords you do not want in the house.",
+  "mode": "blocklist",
+  "quickSearches": [
+    "animal facts for kids",
+    "easy crafts for kids",
+    "lego building ideas",
+    "science experiments for kids"
+  ],
+  "featuredVideos": [],
+  "featuredChannels": [
+    "SciShow Kids",
+    "Art for Kids Hub",
+    "National Geographic Kids"
+  ],
+  "blockedWords": [
+    "horror",
+    "gore",
+    "violence",
+    "prank",
+    "creepypasta",
+    "jump scare"
+  ],
+  "blockedChannels": [],
+  "blockedVideos": [],
+  "allowedSearchTerms": [],
+  "allowedChannels": [],
+  "allowedVideos": [],
+  "videoSwitchingControl": {
+    "enabled": false,
+    "mode": "cooldown",
+    "maxSwitchesInWindow": 4,
+    "windowSeconds": 180,
+    "cooldownSeconds": 15,
+    "title": "Pause before the next video",
+    "message": "Fast switching can make YouTube harder to stop. Take a short pause before opening another video.",
+    "buttonText": "Continue to the video"
+  },
+  "theme": {
+    "accentColor": "#d76546",
+    "accentTint": "#f3d2c7"
+  }
+}
+

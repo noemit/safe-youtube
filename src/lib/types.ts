@@ -1,8 +1,20 @@
 export type FilterMode = "allowlist" | "blocklist";
+export type VideoSwitchingMode = "confirm" | "cooldown";
 
 export interface SiteTheme {
   accentColor: string;
   accentTint: string;
+}
+
+export interface VideoSwitchingControl {
+  enabled: boolean;
+  mode: VideoSwitchingMode;
+  maxSwitchesInWindow: number;
+  windowSeconds: number;
+  cooldownSeconds: number;
+  title: string;
+  message: string;
+  buttonText: string;
 }
 
 export interface SiteConfig {
@@ -19,6 +31,7 @@ export interface SiteConfig {
   allowedSearchTerms: string[];
   allowedChannels: string[];
   allowedVideos: string[];
+  videoSwitchingControl: VideoSwitchingControl;
   theme: SiteTheme;
 }
 
@@ -60,4 +73,3 @@ export interface MaybePromiseProps<T> {
   params?: Promise<T> | T;
   searchParams?: Promise<T> | T;
 }
-

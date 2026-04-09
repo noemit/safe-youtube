@@ -382,11 +382,77 @@ code {
   background: #161616;
 }
 
+.player-frame--guarded {
+  min-height: min(72vw, 36rem);
+  display: grid;
+}
+
 .player-frame iframe {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 0;
+}
+
+.switch-guard {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0.9rem;
+  min-height: min(72vw, 36rem);
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at top, rgba(243, 210, 199, 0.18), transparent 16rem),
+    linear-gradient(180deg, rgba(17, 19, 28, 0.96), rgba(34, 39, 55, 0.96));
+  color: white;
+}
+
+.switch-guard h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  letter-spacing: -0.04em;
+}
+
+.switch-guard p {
+  margin: 0;
+  max-width: 34rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.switch-guard__badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.switch-guard__timer {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.96rem;
+}
+
+.watch-note {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.switch-guard__button {
+  min-height: 3.1rem;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent), #c04f36);
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 @media (min-width: 820px) {

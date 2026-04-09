@@ -3,10 +3,10 @@
   "siteTitle": "Safe YouTube",
 
   // A short sentence that explains what this app is for.
-  "siteDescription": "A calmer YouTube wrapper for families, schools, and therapy sessions.",
+  "siteDescription": "A parent-friendly YouTube wrapper with common-sense controls for kids.",
 
   // This text appears near the main search box.
-  "welcomeMessage": "Search YouTube with your own rules, or tap one of the quick topics below.",
+  "welcomeMessage": "Set safer search rules, approve good channels, and make video hopping less rewarding.",
 
   // Choose one:
   // "blocklist" = hide anything that matches your blocked words, channels, or videos.
@@ -53,10 +53,36 @@
   // Only show these exact videos.
   "allowedVideos": [],
 
+  // RAPID VIDEO SWITCHING CONTROL
+  // Turn this on if you want to make fast video-hopping less rewarding.
+  // After too many switches in a short time, the next video is paused.
+  "videoSwitchingControl": {
+    // false = off
+    "enabled": false,
+
+    // "cooldown" = wait, then the video opens automatically.
+    // "confirm" = wait, then the child must tap Continue.
+    "mode": "cooldown",
+
+    // If a child opens more than this many different videos inside the time window,
+    // the pause starts on the next one.
+    "maxSwitchesInWindow": 4,
+
+    // How far back the app looks when counting switches.
+    "windowSeconds": 180,
+
+    // How long the pause should last.
+    "cooldownSeconds": 15,
+
+    // Text shown during the pause screen.
+    "title": "Pause before the next video",
+    "message": "Fast switching can make YouTube harder to stop. Take a short pause before opening another video.",
+    "buttonText": "Continue to the video"
+  },
+
   // Simple colors for the app shell.
   "theme": {
     "accentColor": "#d76546",
     "accentTint": "#f3d2c7"
   }
 }
-

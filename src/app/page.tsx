@@ -24,11 +24,11 @@ export default async function HomePage() {
         </div>
 
         <div className="hero__panel card">
-          <h2>How this app behaves</h2>
+          <h2>Common-sense controls for parents</h2>
           <p>
             {config.mode === "allowlist"
               ? "Only approved searches, approved channels, or approved videos are shown."
-              : "Searches still use YouTube, but results that match your blocked rules are hidden."}
+              : "Kids can still search normally, but results that match your blocked rules are hidden."}
           </p>
 
           <div className="stat-grid">
@@ -41,8 +41,10 @@ export default async function HomePage() {
               <span>approved channels</span>
             </div>
             <div>
-              <strong>{config.allowedVideos.length}</strong>
-              <span>approved videos</span>
+              <strong>
+                {config.videoSwitchingControl.enabled ? "On" : "Off"}
+              </strong>
+              <span>rapid-switch guard</span>
             </div>
           </div>
         </div>
@@ -71,10 +73,10 @@ export default async function HomePage() {
 
       <section className="section section--split">
         <div className="section__heading">
-          <h2>Approved Channels</h2>
+          <h2>Trusted Channels</h2>
           <p>
-            Add handles or channel URLs in the config file to make this section
-            useful for caregivers and teachers.
+            Add handles or channel URLs in the config file so kids can jump to
+            parent-approved channels with one tap.
           </p>
         </div>
 
@@ -107,8 +109,8 @@ export default async function HomePage() {
         <div className="section__heading">
           <h2>Featured Videos</h2>
           <p>
-            These are optional hand-picked videos. Paste full YouTube links into{" "}
-            <code>featuredVideos</code>.
+            These are optional parent-picked videos. Paste full YouTube links
+            into <code>featuredVideos</code>.
           </p>
         </div>
 
@@ -131,4 +133,3 @@ export default async function HomePage() {
     </main>
   );
 }
-

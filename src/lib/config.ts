@@ -9,9 +9,9 @@ const CONFIG_PATH = path.join(process.cwd(), "safe-youtube.config.jsonc");
 const DEFAULT_CONFIG: SiteConfig = {
   siteTitle: "Safe YouTube",
   siteDescription:
-    "A calmer YouTube wrapper for families, schools, and therapy sessions.",
+    "A parent-friendly YouTube wrapper with common-sense controls for kids.",
   welcomeMessage:
-    "Search YouTube with your own rules, or tap one of the quick topics below.",
+    "Set safer search rules, approve good channels, and make video hopping less rewarding.",
   mode: "blocklist",
   quickSearches: [
     "animal facts for kids",
@@ -27,6 +27,17 @@ const DEFAULT_CONFIG: SiteConfig = {
   allowedSearchTerms: [],
   allowedChannels: [],
   allowedVideos: [],
+  videoSwitchingControl: {
+    enabled: false,
+    mode: "cooldown",
+    maxSwitchesInWindow: 4,
+    windowSeconds: 180,
+    cooldownSeconds: 15,
+    title: "Pause before the next video",
+    message:
+      "Fast switching can make YouTube harder to stop. Take a short pause before opening another video.",
+    buttonText: "Continue to the video",
+  },
   theme: {
     accentColor: "#d76546",
     accentTint: "#f3d2c7",
@@ -62,9 +73,27 @@ function sanitizeColor(value: unknown, fallback: string): string {
   return /^#[0-9a-fA-F]{6}$/.test(trimmed) ? trimmed : fallback;
 }
 
+function sanitizeBoolean(value: unknown, fallback: boolean): boolean {
+  if (typeof value !== "boolean") {
+    return fallback;
+  }
+
+  return value;
+}
+
+function sanitizePositiveInteger(value: unknown, fallback: number): number {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return fallback;
+  }
+
+  const normalized = Math.floor(value);
+  return normalized > 0 ? normalized : fallback;
+}
+
 function normalizeConfig(raw: unknown): SiteConfig {
   const source = raw && typeof raw === "object" ? raw : {};
   const config = source as Partial<SiteConfig> & {
+    videoSwitchingControl?: Partial<SiteConfig["videoSwitchingControl"]>;
     theme?: Partial<SiteConfig["theme"]>;
   };
 
@@ -90,6 +119,40 @@ function normalizeConfig(raw: unknown): SiteConfig {
     allowedSearchTerms: sanitizeTextArray(config.allowedSearchTerms),
     allowedChannels: sanitizeTextArray(config.allowedChannels),
     allowedVideos: sanitizeTextArray(config.allowedVideos),
+    videoSwitchingControl: {
+      enabled: sanitizeBoolean(
+        config.videoSwitchingControl?.enabled,
+        DEFAULT_CONFIG.videoSwitchingControl.enabled,
+      ),
+      mode:
+        config.videoSwitchingControl?.mode === "confirm"
+          ? "confirm"
+          : DEFAULT_CONFIG.videoSwitchingControl.mode,
+      maxSwitchesInWindow: sanitizePositiveInteger(
+        config.videoSwitchingControl?.maxSwitchesInWindow,
+        DEFAULT_CONFIG.videoSwitchingControl.maxSwitchesInWindow,
+      ),
+      windowSeconds: sanitizePositiveInteger(
+        config.videoSwitchingControl?.windowSeconds,
+        DEFAULT_CONFIG.videoSwitchingControl.windowSeconds,
+      ),
+      cooldownSeconds: sanitizePositiveInteger(
+        config.videoSwitchingControl?.cooldownSeconds,
+        DEFAULT_CONFIG.videoSwitchingControl.cooldownSeconds,
+      ),
+      title: sanitizeText(
+        config.videoSwitchingControl?.title,
+        DEFAULT_CONFIG.videoSwitchingControl.title,
+      ),
+      message: sanitizeText(
+        config.videoSwitchingControl?.message,
+        DEFAULT_CONFIG.videoSwitchingControl.message,
+      ),
+      buttonText: sanitizeText(
+        config.videoSwitchingControl?.buttonText,
+        DEFAULT_CONFIG.videoSwitchingControl.buttonText,
+      ),
+    },
     theme: {
       accentColor: sanitizeColor(
         config.theme?.accentColor,
@@ -112,4 +175,3 @@ export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
     return DEFAULT_CONFIG;
   }
 });
-

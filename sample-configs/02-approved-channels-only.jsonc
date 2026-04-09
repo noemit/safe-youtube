@@ -1,0 +1,49 @@
+{
+  "siteTitle": "Approved Channels Only",
+  "siteDescription": "A stricter Safe YouTube setup for younger kids.",
+  "welcomeMessage": "This version only shows videos from trusted channels picked by a parent.",
+  "mode": "allowlist",
+  "quickSearches": [
+    "science for kids",
+    "drawing for kids",
+    "phonics songs",
+    "nature for kids"
+  ],
+  "featuredVideos": [],
+  "featuredChannels": [
+    "SciShow Kids",
+    "Art for Kids Hub",
+    "National Geographic Kids"
+  ],
+  "blockedWords": ["horror", "gore", "violence", "prank"],
+  "blockedChannels": [],
+  "blockedVideos": [],
+  "allowedSearchTerms": [
+    "science",
+    "drawing",
+    "phonics",
+    "animals",
+    "nature"
+  ],
+  "allowedChannels": [
+    "SciShow Kids",
+    "Art for Kids Hub",
+    "National Geographic Kids"
+  ],
+  "allowedVideos": [],
+  "videoSwitchingControl": {
+    "enabled": true,
+    "mode": "cooldown",
+    "maxSwitchesInWindow": 3,
+    "windowSeconds": 180,
+    "cooldownSeconds": 20,
+    "title": "Slow down for a moment",
+    "message": "This app is set up to slow down fast channel surfing. Wait a moment before the next video opens.",
+    "buttonText": "Continue to the video"
+  },
+  "theme": {
+    "accentColor": "#4474a6",
+    "accentTint": "#d7e5f4"
+  }
+}
+

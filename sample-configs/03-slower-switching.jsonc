@@ -1,0 +1,45 @@
+{
+  "siteTitle": "Calm YouTube Time",
+  "siteDescription": "A parent setup that allows browsing, but slows down rapid skipping.",
+  "welcomeMessage": "Use parent-approved search rules, and make endless video hopping less rewarding.",
+  "mode": "blocklist",
+  "quickSearches": [
+    "bedtime stories for kids",
+    "sleep music for kids",
+    "guided breathing for children",
+    "calm drawing tutorial"
+  ],
+  "featuredVideos": [],
+  "featuredChannels": [
+    "Cosmic Kids Yoga",
+    "Art for Kids Hub"
+  ],
+  "blockedWords": [
+    "horror",
+    "gore",
+    "violence",
+    "prank",
+    "creepy",
+    "scary"
+  ],
+  "blockedChannels": [],
+  "blockedVideos": [],
+  "allowedSearchTerms": [],
+  "allowedChannels": [],
+  "allowedVideos": [],
+  "videoSwitchingControl": {
+    "enabled": true,
+    "mode": "confirm",
+    "maxSwitchesInWindow": 2,
+    "windowSeconds": 180,
+    "cooldownSeconds": 25,
+    "title": "Take a breath before the next video",
+    "message": "This parent setting adds a calm pause when videos are switched too quickly.",
+    "buttonText": "Open the next video"
+  },
+  "theme": {
+    "accentColor": "#4d8771",
+    "accentTint": "#d6ebe4"
+  }
+}
+

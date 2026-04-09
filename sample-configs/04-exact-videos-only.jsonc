@@ -1,0 +1,35 @@
+{
+  "siteTitle": "Only These Videos",
+  "siteDescription": "A locked-down setup that only shows exact videos chosen by a parent.",
+  "welcomeMessage": "Replace the sample video links below with the exact YouTube videos you want to allow.",
+  "mode": "allowlist",
+  "quickSearches": [],
+  "featuredVideos": [
+    "https://www.youtube.com/watch?v=VIDEO_ID_1",
+    "https://www.youtube.com/watch?v=VIDEO_ID_2"
+  ],
+  "featuredChannels": [],
+  "blockedWords": ["horror", "gore", "violence", "prank"],
+  "blockedChannels": [],
+  "blockedVideos": [],
+  "allowedSearchTerms": [],
+  "allowedChannels": [],
+  "allowedVideos": [
+    "https://www.youtube.com/watch?v=VIDEO_ID_1",
+    "https://www.youtube.com/watch?v=VIDEO_ID_2"
+  ],
+  "videoSwitchingControl": {
+    "enabled": true,
+    "mode": "confirm",
+    "maxSwitchesInWindow": 2,
+    "windowSeconds": 180,
+    "cooldownSeconds": 20,
+    "title": "One moment before the next video",
+    "message": "This parent setting slows down rapid tapping between videos.",
+    "buttonText": "Continue"
+  },
+  "theme": {
+    "accentColor": "#b06b35",
+    "accentTint": "#f2e0cf"
+  }
+}
