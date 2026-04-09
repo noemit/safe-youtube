@@ -75,6 +75,7 @@
     "@Blippi",
     "@Numberblocks",
     "@NumberjacksTV",
+    "@PeppaPigOfficial",
     "@desene-animate-romana-tralala"
   ],
 
@@ -101,6 +102,7 @@
   // These channels are used when `simpleSettings.allowOnlyApprovedChannels` is `1`,
   // or when you choose advanced `allowlist` mode.
   "allowedChannels": [
+    "@PeppaPigOfficial",
     "@desene-animate-romana-tralala"
   ],
 
