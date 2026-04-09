@@ -216,6 +216,31 @@ Practical advice:
 - use `confirm` if you want rapid switching to feel more annoying and less rewarding
 - start with a short pause like 15 or 20 seconds
 
+## Watch Flow Controls
+
+The watch page can also guide what happens after a video starts or ends.
+
+```jsonc
+"watchSuggestions": [
+  "https://www.youtube.com/watch?v=VIDEO_ID_1",
+  "https://www.youtube.com/watch?v=VIDEO_ID_2"
+],
+"watchExperience": {
+  "blockUnexpectedVideoChanges": true,
+  "revealSuggestionsAfterSeconds": 5,
+  "autoPlayNextSuggestion": true,
+  "autoPlayNextSuggestionSeconds": 10
+}
+```
+
+What these settings do:
+
+- `watchSuggestions`: approved videos shown below the player as safe next choices
+- `blockUnexpectedVideoChanges`: if the YouTube player switches to a different video, Safe YouTube stops it and shows its own overlay again
+- `revealSuggestionsAfterSeconds`: how long a child needs to watch before the safe suggestions appear below the video
+- `autoPlayNextSuggestion`: after a video ends, automatically start the first approved next video
+- `autoPlayNextSuggestionSeconds`: how long the countdown lasts before the approved next video starts
+
 ## What Each Setting Means
 
 Inside `safe-youtube.config.jsonc`:
@@ -227,12 +252,14 @@ Inside `safe-youtube.config.jsonc`:
 - `categories`: big topic buttons on the home page
 - `featuredVideos`: full YouTube links shown on the home page
 - `featuredChannels`: trusted channels shown on the home page
+- `watchSuggestions`: approved next videos shown below the player
 - `blockedWords`: hide results whose title, description, or channel matches these terms
 - `blockedChannels`: hide results from these channels
 - `blockedVideos`: hide exact videos by link or video ID
 - `allowedSearchTerms`: in allowlist mode, only searches matching these terms are allowed
 - `allowedChannels`: in allowlist mode, only videos from these channels are allowed
 - `allowedVideos`: in allowlist mode, only these exact videos are allowed
+- `watchExperience`: controls the end overlay, safe follow-up suggestions, and countdown behavior
 - `videoSwitchingControl`: slows rapid switching between videos
 - `theme.accentColor`: main button color
 - `theme.accentTint`: softer accent color
@@ -321,6 +348,7 @@ npm start
 - the app reads its rules from `safe-youtube.config.jsonc`
 - search results are filtered before they are shown
 - the watch page also respects the rules, so direct video links are still checked
+- the watch page can show a Safe YouTube end overlay, approved follow-up videos, and an optional auto-play countdown for the next approved suggestion
 - the rapid-switch guard runs in the browser so it can react to how quickly a child opens new videos
 - the app includes a manifest and service worker so it can be added to an iPad home screen
 - ad-free playback depends on YouTube and YouTube Premium, not on this app itself

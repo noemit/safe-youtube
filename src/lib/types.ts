@@ -11,6 +11,13 @@ export interface SearchCategory {
   query: string;
 }
 
+export interface WatchExperience {
+  blockUnexpectedVideoChanges: boolean;
+  revealSuggestionsAfterSeconds: number;
+  autoPlayNextSuggestion: boolean;
+  autoPlayNextSuggestionSeconds: number;
+}
+
 export interface VideoSwitchingControl {
   enabled: boolean;
   mode: VideoSwitchingMode;
@@ -31,12 +38,14 @@ export interface SiteConfig {
   quickSearches: string[];
   featuredVideos: string[];
   featuredChannels: string[];
+  watchSuggestions: string[];
   blockedWords: string[];
   blockedChannels: string[];
   blockedVideos: string[];
   allowedSearchTerms: string[];
   allowedChannels: string[];
   allowedVideos: string[];
+  watchExperience: WatchExperience;
   videoSwitchingControl: VideoSwitchingControl;
   theme: SiteTheme;
 }

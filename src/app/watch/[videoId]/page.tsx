@@ -2,7 +2,7 @@ import { HomeButton } from "@/components/HomeButton";
 import { WatchPlayer } from "@/components/WatchPlayer";
 import { getSiteConfig } from "@/lib/config";
 import { filterSearchResults, extractVideoId } from "@/lib/filters";
-import { getVideoPreview } from "@/lib/youtube";
+import { getFeaturedVideos, getVideoPreview } from "@/lib/youtube";
 
 type WatchPageProps = {
   params: Promise<{
@@ -32,6 +32,15 @@ export default async function WatchPage({
   }
 
   const preview = await getVideoPreview(videoId);
+  const suggestionSources =
+    config.watchSuggestions.length > 0
+      ? config.watchSuggestions
+      : [...config.featuredVideos, ...config.allowedVideos];
+  const suggestedVideos = (
+    await getFeaturedVideos(Array.from(new Set(suggestionSources)))
+  )
+    .filter((item) => item.videoId !== videoId)
+    .slice(0, 6);
   const canShowVideo = preview
     ? filterSearchResults([preview], config).length > 0 ||
       config.featuredVideos.some((item) => extractVideoId(item) === videoId)
@@ -70,13 +79,15 @@ export default async function WatchPage({
         <HomeButton />
       </section>
 
-      <section className="player-card">
-        <WatchPlayer
-          control={config.videoSwitchingControl}
-          title={preview?.title ?? "YouTube video"}
-          videoId={videoId}
-        />
-      </section>
+      <WatchPlayer
+        categories={config.categories}
+        control={config.videoSwitchingControl}
+        key={videoId}
+        suggestions={suggestedVideos}
+        title={preview?.title ?? "YouTube video"}
+        videoId={videoId}
+        watchExperience={config.watchExperience}
+      />
     </main>
   );
 }

@@ -45,6 +45,11 @@
   // "https://www.youtube.com/@ArtforKidsHub"
   "featuredChannels": [],
 
+  // Optional: these approved videos can appear below the player and be used
+  // as "next up" suggestions after a video ends.
+  // If this list is empty, the app falls back to featuredVideos and allowedVideos.
+  "watchSuggestions": [],
+
   // BLOCKLIST MODE
   // Hide results if the title, description, or channel contains any of these words.
   "blockedWords": ["horror", "gore", "violence", "prank"],
@@ -65,6 +70,22 @@
 
   // Only show these exact videos.
   "allowedVideos": [],
+
+  // WATCH EXPERIENCE
+  "watchExperience": {
+    // If a child taps a different video through YouTube's own "More videos" UI,
+    // stop the player and show the Safe YouTube overlay again.
+    "blockUnexpectedVideoChanges": true,
+
+    // Show the approved suggestions below the main player after this many seconds.
+    "revealSuggestionsAfterSeconds": 5,
+
+    // After a video ends, start the first approved suggestion automatically.
+    "autoPlayNextSuggestion": true,
+
+    // How long the end-of-video countdown should last.
+    "autoPlayNextSuggestionSeconds": 10
+  },
 
   // RAPID VIDEO SWITCHING CONTROL
   // Turn this on if you want to make fast video-hopping less rewarding.

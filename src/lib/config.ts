@@ -39,12 +39,19 @@ const DEFAULT_CONFIG: SiteConfig = {
   ],
   featuredVideos: [],
   featuredChannels: [],
+  watchSuggestions: [],
   blockedWords: ["horror", "gore", "violence", "prank"],
   blockedChannels: [],
   blockedVideos: [],
   allowedSearchTerms: [],
   allowedChannels: [],
   allowedVideos: [],
+  watchExperience: {
+    blockUnexpectedVideoChanges: true,
+    revealSuggestionsAfterSeconds: 5,
+    autoPlayNextSuggestion: true,
+    autoPlayNextSuggestionSeconds: 10,
+  },
   videoSwitchingControl: {
     enabled: false,
     mode: "cooldown",
@@ -137,9 +144,19 @@ function sanitizePositiveInteger(value: unknown, fallback: number): number {
   return normalized > 0 ? normalized : fallback;
 }
 
+function sanitizeNonNegativeInteger(value: unknown, fallback: number): number {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return fallback;
+  }
+
+  const normalized = Math.floor(value);
+  return normalized >= 0 ? normalized : fallback;
+}
+
 function normalizeConfig(raw: unknown): SiteConfig {
   const source = raw && typeof raw === "object" ? raw : {};
   const config = source as Partial<SiteConfig> & {
+    watchExperience?: Partial<SiteConfig["watchExperience"]>;
     videoSwitchingControl?: Partial<SiteConfig["videoSwitchingControl"]>;
     theme?: Partial<SiteConfig["theme"]>;
   };
@@ -171,12 +188,31 @@ function normalizeConfig(raw: unknown): SiteConfig {
     quickSearches,
     featuredVideos: sanitizeTextArray(config.featuredVideos),
     featuredChannels: sanitizeTextArray(config.featuredChannels),
+    watchSuggestions: sanitizeTextArray(config.watchSuggestions),
     blockedWords: sanitizeTextArray(config.blockedWords),
     blockedChannels: sanitizeTextArray(config.blockedChannels),
     blockedVideos: sanitizeTextArray(config.blockedVideos),
     allowedSearchTerms: sanitizeTextArray(config.allowedSearchTerms),
     allowedChannels: sanitizeTextArray(config.allowedChannels),
     allowedVideos: sanitizeTextArray(config.allowedVideos),
+    watchExperience: {
+      blockUnexpectedVideoChanges: sanitizeBoolean(
+        config.watchExperience?.blockUnexpectedVideoChanges,
+        DEFAULT_CONFIG.watchExperience.blockUnexpectedVideoChanges,
+      ),
+      revealSuggestionsAfterSeconds: sanitizeNonNegativeInteger(
+        config.watchExperience?.revealSuggestionsAfterSeconds,
+        DEFAULT_CONFIG.watchExperience.revealSuggestionsAfterSeconds,
+      ),
+      autoPlayNextSuggestion: sanitizeBoolean(
+        config.watchExperience?.autoPlayNextSuggestion,
+        DEFAULT_CONFIG.watchExperience.autoPlayNextSuggestion,
+      ),
+      autoPlayNextSuggestionSeconds: sanitizePositiveInteger(
+        config.watchExperience?.autoPlayNextSuggestionSeconds,
+        DEFAULT_CONFIG.watchExperience.autoPlayNextSuggestionSeconds,
+      ),
+    },
     videoSwitchingControl: {
       enabled: sanitizeBoolean(
         config.videoSwitchingControl?.enabled,

@@ -82,8 +82,10 @@ function getConfigWarnings(parsed: unknown): string[] {
     categories?: unknown;
     featuredVideos?: unknown;
     featuredChannels?: unknown;
+    watchSuggestions?: unknown;
     blockedWords?: unknown;
     allowedChannels?: unknown;
+    watchExperience?: unknown;
     videoSwitchingControl?: unknown;
   };
   const warnings: string[] = [];
@@ -116,6 +118,7 @@ function getConfigWarnings(parsed: unknown): string[] {
   for (const listKey of [
     "featuredVideos",
     "featuredChannels",
+    "watchSuggestions",
     "blockedWords",
     "allowedChannels",
   ] as const) {
@@ -124,6 +127,15 @@ function getConfigWarnings(parsed: unknown): string[] {
     if (value !== undefined && !Array.isArray(value)) {
       warnings.push(`\`${listKey}\` should be a list in square brackets.`);
     }
+  }
+
+  if (
+    config.watchExperience !== undefined &&
+    (!config.watchExperience ||
+      typeof config.watchExperience !== "object" ||
+      Array.isArray(config.watchExperience))
+  ) {
+    warnings.push("`watchExperience` should be one object wrapped in `{` and `}`.");
   }
 
   if (
@@ -145,8 +157,17 @@ const EXAMPLE_TEXT = `{
     { "label": "Animals", "query": "animals for kids" },
     { "label": "Drawing", "query": "drawing for kids" }
   ],
+  "watchSuggestions": [
+    "https://www.youtube.com/watch?v=VIDEO_ID_1"
+  ],
   "mode": "blocklist",
-  "blockedWords": ["horror", "violence", "prank"]
+  "blockedWords": ["horror", "violence", "prank"],
+  "watchExperience": {
+    "blockUnexpectedVideoChanges": true,
+    "revealSuggestionsAfterSeconds": 5,
+    "autoPlayNextSuggestion": true,
+    "autoPlayNextSuggestionSeconds": 10
+  }
 }`;
 
 export function JsoncChecker() {
