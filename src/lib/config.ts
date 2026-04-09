@@ -7,7 +7,7 @@ import type { SiteConfig } from "@/lib/types";
 const CONFIG_PATH = path.join(process.cwd(), "safe-youtube.config.jsonc");
 
 const DEFAULT_CONFIG: SiteConfig = {
-  siteTitle: "Safe YouTube",
+  siteTitle: "Youtube - Safe",
   siteDescription:
     "A parent-friendly YouTube wrapper with common-sense controls for kids.",
   welcomeMessage:

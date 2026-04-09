@@ -6,7 +6,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
 
   return {
     name: config.siteTitle,
-    short_name: config.siteTitle.slice(0, 12),
+    short_name: config.siteTitle,
     description: config.siteDescription,
     start_url: "/",
     display: "standalone",
@@ -26,4 +26,3 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     ],
   };
 }
-
