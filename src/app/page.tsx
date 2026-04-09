@@ -26,11 +26,6 @@ export default async function HomePage() {
 
       {config.categories.length > 0 ? (
         <section className="section">
-          <div className="section__heading">
-            <h2>Pick a Topic</h2>
-            <p>Tap a big button to start.</p>
-          </div>
-
           <CategoryGrid categories={config.categories} />
         </section>
       ) : null}
