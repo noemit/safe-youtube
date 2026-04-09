@@ -320,6 +320,7 @@ npm start
 - the watch page also respects the rules, so direct video links are still checked
 - the rapid-switch guard runs in the browser so it can react to how quickly a child opens new videos
 - the app includes a manifest and service worker so it can be added to an iPad home screen
+- ad-free playback depends on YouTube and YouTube Premium, not on this app itself
 
 ## Good First Edit
 
