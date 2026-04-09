@@ -77,23 +77,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <main className="shell shell--compact">
       <StickyTopNav backHref="/" />
 
-      <section className="page-banner card">
-        <div>
-          <span className="eyebrow">Search</span>
-          <h1>Parent-Filtered YouTube Search</h1>
-          {allowSearching ? (
-            <p>
-              Kids can search the usual way. This app applies the family rules
-              from your config file before showing any results.
-            </p>
-          ) : (
-            <p>
-              Typing search is off. Use topic buttons and trusted channels that
-              a parent has already set up.
-            </p>
-          )}
-        </div>
-        <div className="page-banner__actions">
+      <section className="search-toolbar card">
+        <div className="search-toolbar__form">
           <SearchForm defaultValue={query} disabled={!allowSearching} />
         </div>
       </section>
