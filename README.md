@@ -23,6 +23,7 @@ You control the rules in `safe-youtube.config.jsonc`.
 That file can do all of this:
 
 - `simpleSettings`: easy yes/no switches near the top of the file
+- `topNote`: a small line of text at the very top of the app, like `Built for Nina and Max`
 - `categories`: big home-screen buttons that parents define in the config, including optional emoji labels. Each one runs a search using the words in `searchFor`.
 - `blocklist` mode: normal search, but hide results that match blocked words, channels, or videos
 - `allowlist` mode: only show approved searches, approved channels, or approved videos
@@ -104,6 +105,7 @@ If you prefer, you can skip this and just edit `safe-youtube.config.jsonc` direc
 In most cases, you only need to:
 
 - change `1` to `0`, or `0` to `1`, in the top `simpleSettings` block
+- optionally add a short `topNote` like `Built for Nina and Max`
 - change words inside quotes
 - add or remove lines inside lists
 - edit the `categories` button text and the `searchFor` phrase Safe YouTube should search for

@@ -10,6 +10,7 @@ const DEFAULT_CONFIG: SiteConfig = {
   siteTitle: "Youtube - Safe",
   siteDescription:
     "A parent-friendly YouTube wrapper with common-sense controls for kids.",
+  topNote: "",
   welcomeMessage:
     "Set safer search rules, approve good channels, and make video hopping less rewarding.",
   simpleSettings: {
@@ -276,6 +277,7 @@ function normalizeConfig(raw: unknown): SiteConfig {
       config.siteDescription,
       DEFAULT_CONFIG.siteDescription,
     ),
+    topNote: sanitizeText(config.topNote, DEFAULT_CONFIG.topNote),
     welcomeMessage: sanitizeText(
       config.welcomeMessage,
       DEFAULT_CONFIG.welcomeMessage,

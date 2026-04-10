@@ -270,6 +270,7 @@ function getConfigWarnings(parsed: unknown): string[] {
 const EXAMPLE_TEXT = `{
   // Paste your Safe YouTube config here.
   "siteTitle": "Maya's Safe YouTube",
+  "topNote": "Built for Maya and Leo",
   "simpleSettings": {
     "allowSearching": 1,
     "allowOnlyApprovedChannels": 0,

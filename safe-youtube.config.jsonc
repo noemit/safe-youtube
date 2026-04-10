@@ -5,6 +5,9 @@
   // A short sentence that explains what this app is for.
   "siteDescription": "A parent-friendly YouTube wrapper with common-sense controls for kids.",
 
+  // Optional: a small note shown at the very top of the app.
+  "topNote": "For Nina and Max",
+
   // This text appears near the main search box.
   "welcomeMessage": "Set safer search rules, approve good channels, and make video hopping less rewarding.",
 

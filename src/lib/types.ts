@@ -39,6 +39,7 @@ export interface VideoSwitchingControl {
 export interface SiteConfig {
   siteTitle: string;
   siteDescription: string;
+  topNote: string;
   welcomeMessage: string;
   simpleSettings: SimpleSettings;
   categories: SearchCategory[];

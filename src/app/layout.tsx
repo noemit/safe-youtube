@@ -83,6 +83,22 @@ export default async function RootLayout({
 })();`}
         </Script>
         <PwaInit />
+        {config.topNote ? (
+          <div
+            style={{
+              width: "min(1120px, calc(100% - 2rem))",
+              margin: "0 auto",
+              paddingTop: "calc(env(safe-area-inset-top, 0px) + 0.75rem)",
+              color: "var(--muted)",
+              fontSize: "0.78rem",
+              lineHeight: 1.4,
+              textAlign: "center",
+              opacity: 0.92,
+            }}
+          >
+            {config.topNote}
+          </div>
+        ) : null}
         {children}
       </body>
     </html>
