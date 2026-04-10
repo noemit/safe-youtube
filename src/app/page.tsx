@@ -20,7 +20,6 @@ export default async function HomePage() {
       <section className="hero hero--full-width">
         <div className="hero__copy">
           <h1>{config.siteTitle}</h1>
-          <p>{config.welcomeMessage}</p>
           <SearchForm disabled={!allowSearching} />
           {!allowSearching ? (
             <p className="helper-text">
