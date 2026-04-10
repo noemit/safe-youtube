@@ -75,7 +75,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <main className="shell shell--compact">
-      <StickyTopNav backHref="/" />
+      <StickyTopNav showBack={false} />
 
       <section className="search-toolbar card">
         <div className="search-toolbar__form">

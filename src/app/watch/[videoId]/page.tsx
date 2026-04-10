@@ -34,6 +34,12 @@ export default async function WatchPage({
   const videoId = extractVideoId(rawVideoId);
   const query = readQueryValue(resolvedSearchParams.q).trim();
   const guidedSearch = readQueryValue(resolvedSearchParams.guided).trim() === "1";
+  const cameFromCategory =
+    guidedSearch &&
+    query.length > 0 &&
+    config.categories.some(
+      (category) => category.searchFor.trim().toLowerCase() === query.toLowerCase(),
+    );
   const backHref = query
     ? `/search?q=${encodeURIComponent(query)}${guidedSearch ? "&guided=1" : ""}`
     : "/";
@@ -41,7 +47,7 @@ export default async function WatchPage({
   if (!videoId) {
     return (
       <main className="shell shell--compact">
-        <StickyTopNav backHref={backHref} />
+        <StickyTopNav backHref={backHref} showBack={cameFromCategory} />
 
         <section className="empty-card">
           <h1>Video not found</h1>
@@ -69,7 +75,7 @@ export default async function WatchPage({
   if (!canShowVideo) {
     return (
       <main className="shell shell--compact">
-        <StickyTopNav backHref={backHref} />
+        <StickyTopNav backHref={backHref} showBack={cameFromCategory} />
 
         <section className="empty-card">
           <h1>This video is blocked</h1>
@@ -84,7 +90,7 @@ export default async function WatchPage({
 
   return (
     <main className="shell shell--compact">
-      <StickyTopNav backHref={backHref} />
+      <StickyTopNav backHref={backHref} showBack={cameFromCategory} />
 
       <section className="watch-header">
         <div>
