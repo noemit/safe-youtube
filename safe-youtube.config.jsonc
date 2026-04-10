@@ -36,16 +36,16 @@
   // Emojis are fine here and can make the topics easier to spot.
   "categories": [
     {
-      "label": "🐘 Animals",
-      "searchFor": "animal facts for kids"
+      "label": "🔮 Marble run",
+      "searchFor": "dapper marble race"
     },
     {
       "label": "🚀 Space",
       "searchFor": "space documentary for kids"
     },
     {
-      "label": "🎨 Drawing",
-      "searchFor": "drawing tutorial for beginners"
+      "label": "🎨 Painting",
+      "searchFor": "Relaxing creative painting for kids"
     },
     {
       "label": "🧱 Lego",
