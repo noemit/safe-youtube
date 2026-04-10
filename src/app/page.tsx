@@ -39,10 +39,6 @@ export default async function HomePage() {
       <section className="section section--split">
         <div className="section__heading">
           <h2>Trusted Channels</h2>
-          <p>
-            Add handles or channel URLs in the config file so kids can jump to
-            parent-approved channels with one tap.
-          </p>
         </div>
 
         {featuredChannels.length > 0 ? (
