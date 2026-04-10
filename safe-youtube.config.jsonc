@@ -89,7 +89,7 @@
 
   // BLOCKLIST MODE
   // Hide results if the title, description, or channel contains any of these words.
-  "blockedWords": ["horror", "gore", "violence", "prank"],
+  "blockedWords": ["horror", "gore", "violence", "prank", "cocomelon"],
 
   // Hide results from these channels.
   "blockedChannels": [],
