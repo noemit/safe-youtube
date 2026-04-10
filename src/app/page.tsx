@@ -20,13 +20,7 @@ export default async function HomePage() {
       <section className="hero">
         <div className="hero__copy">
           <h1>{config.siteTitle}</h1>
-          <SearchForm disabled={!allowSearching} />
-          {!allowSearching ? (
-            <p className="helper-text">
-              Typing search is off. Kids can still use the topic buttons and
-              trusted channels below.
-            </p>
-          ) : null}
+          {allowSearching ? <SearchForm /> : null}
         </div>
       </section>
 

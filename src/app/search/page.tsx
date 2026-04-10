@@ -77,11 +77,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <main className="shell shell--compact">
       <StickyTopNav showBack={false} />
 
-      <section className="search-toolbar card">
-        <div className="search-toolbar__form">
-          <SearchForm defaultValue={query} disabled={!allowSearching} />
-        </div>
-      </section>
+      {allowSearching ? (
+        <section className="search-toolbar card">
+          <div className="search-toolbar__form">
+            <SearchForm defaultValue={query} />
+          </div>
+        </section>
+      ) : null}
 
       {!query ? (
         <section className="empty-card">
