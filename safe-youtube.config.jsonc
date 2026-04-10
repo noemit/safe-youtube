@@ -17,7 +17,7 @@
   "simpleSettings": {
     // `1` = show the typing search box.
     // `0` = hide typing search. Topic buttons and trusted channels still work.
-    "allowSearching": 1,
+    "allowSearching": 0,
 
     // `1` = only allow videos from `allowedChannels` below.
     // Add approved channels to `allowedChannels` first.
@@ -28,7 +28,7 @@
     "allowOnlyApprovedVideos": 0,
 
     // `1` = turn on the pause that slows down fast video hopping.
-    "slowDownFastSwitching": 0
+    "slowDownFastSwitching": 1
   },
 
   // These big buttons appear on the home screen.
