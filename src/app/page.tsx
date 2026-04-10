@@ -17,7 +17,7 @@ export default async function HomePage() {
 
   return (
     <main className="shell">
-      <section className="hero hero--full-width">
+      <section className="hero">
         <div className="hero__copy">
           <h1>{config.siteTitle}</h1>
           <SearchForm disabled={!allowSearching} />
