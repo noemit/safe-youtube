@@ -91,10 +91,6 @@ export default async function HomePage() {
       <section className="section">
         <div className="section__heading">
           <h2>Featured Videos</h2>
-          <p>
-            These are optional parent-picked videos. Paste full YouTube links
-            into <code>featuredVideos</code>.
-          </p>
         </div>
 
         {featuredVideos.length > 0 ? (
