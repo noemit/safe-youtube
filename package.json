@@ -2,6 +2,12 @@
   "name": "safe-youtube",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 12"
+  ],
   "engines": {
     "node": ">=20"
   },
@@ -27,4 +33,3 @@
     "typescript": "^5.9.3"
   }
 }
-

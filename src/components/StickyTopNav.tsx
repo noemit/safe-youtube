@@ -10,6 +10,10 @@ interface StickyTopNavProps {
   backHref?: string;
 }
 
+function getLastItem(items: string[]): string | undefined {
+  return items.length > 0 ? items[items.length - 1] : undefined;
+}
+
 function readNavStack(): string[] {
   try {
     const raw = window.sessionStorage.getItem(NAV_STACK_KEY);
@@ -48,7 +52,7 @@ export function StickyTopNav({ backHref = "/" }: StickyTopNavProps) {
   useEffect(() => {
     const stack = readNavStack();
 
-    if (stack.at(-1) === currentHref) {
+    if (getLastItem(stack) === currentHref) {
       return;
     }
 
@@ -59,8 +63,8 @@ export function StickyTopNav({ backHref = "/" }: StickyTopNavProps) {
   function goBack() {
     const stack = readNavStack();
     const trimmedStack =
-      stack.at(-1) === currentHref ? stack.slice(0, -1) : stack;
-    const previousHref = trimmedStack.at(-1);
+      getLastItem(stack) === currentHref ? stack.slice(0, -1) : stack;
+    const previousHref = getLastItem(trimmedStack);
 
     if (previousHref) {
       writeNavStack(trimmedStack);
