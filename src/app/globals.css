@@ -81,6 +81,11 @@ code {
   align-items: stretch;
 }
 
+.hero--full-width {
+  width: min(100vw - 2rem, 1600px);
+  margin-inline: calc(50% - 50vw + 1rem);
+}
+
 .hero__copy,
 .hero__panel,
 .card,
