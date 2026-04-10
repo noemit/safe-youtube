@@ -116,7 +116,6 @@ code {
 
 .hero__copy h1 {
   font-size: clamp(2.5rem, 7vw, 4.75rem);
-  max-width: 10ch;
 }
 
 .hero__copy p,
