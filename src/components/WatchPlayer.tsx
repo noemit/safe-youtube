@@ -37,9 +37,14 @@ interface YouTubePlayerStateEvent {
   target: YouTubePlayerInstance;
 }
 
+interface YouTubePlayerReadyEvent {
+  target: YouTubePlayerInstance;
+}
+
 interface YouTubePlayerInstance {
   destroy(): void;
   getCurrentTime(): number;
+  playVideo(): void;
   getVideoUrl(): string;
   stopVideo(): void;
 }
@@ -53,7 +58,7 @@ interface YouTubeIframeNamespace {
       videoId: string;
       playerVars?: Record<string, number | string>;
       events?: {
-        onReady?: () => void;
+        onReady?: (event: YouTubePlayerReadyEvent) => void;
         onStateChange?: (event: YouTubePlayerStateEvent) => void;
       };
     },
@@ -204,6 +209,50 @@ function extractVideoIdFromUrl(url: string): string | null {
   }
 }
 
+function centerElementInViewport(element: HTMLElement) {
+  const stickyNav = document.querySelector<HTMLElement>(".sticky-nav");
+  const stickyNavBottom = stickyNav?.getBoundingClientRect().bottom ?? 0;
+  const viewportHeight = window.innerHeight;
+  const topInset = Math.max(stickyNavBottom, 0) + 16;
+  const availableHeight = Math.max(viewportHeight - topInset - 16, 0);
+  const rect = element.getBoundingClientRect();
+  const centeredOffset = topInset + Math.max((availableHeight - rect.height) / 2, 0);
+  const maxScrollTop = Math.max(
+    document.documentElement.scrollHeight - viewportHeight,
+    0,
+  );
+  const targetTop = Math.max(
+    0,
+    Math.min(window.scrollY + rect.top - centeredOffset, maxScrollTop),
+  );
+
+  window.scrollTo({
+    top: targetTop,
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth",
+  });
+}
+
+function ensureIframeAllowsAutoplay(host: HTMLDivElement | null) {
+  const iframe = host?.querySelector("iframe");
+
+  if (!iframe) {
+    return;
+  }
+
+  const existingAllow = iframe.getAttribute("allow") ?? "";
+
+  if (existingAllow.toLowerCase().includes("autoplay")) {
+    return;
+  }
+
+  iframe.setAttribute(
+    "allow",
+    existingAllow ? `${existingAllow}; autoplay` : "autoplay",
+  );
+}
+
 function loadYouTubeIframeApi(): Promise<YouTubeIframeNamespace> {
   if (typeof window === "undefined") {
     return Promise.reject(new Error("The YouTube API can only load in the browser."));
@@ -262,6 +311,7 @@ export function WatchPlayer({
   categories,
 }: WatchPlayerProps) {
   const router = useRouter();
+  const playerCardRef = useRef<HTMLElement | null>(null);
   const playerHostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<YouTubePlayerInstance | null>(null);
   const blockedVideoChangeRef = useRef(false);
@@ -299,6 +349,22 @@ export function WatchPlayer({
   const countdownStyle = {
     "--countdown-progress": `${Math.max(0, Math.min(100, countdownProgress))}%`,
   } as CSSProperties;
+
+  useEffect(() => {
+    const playerCard = playerCardRef.current;
+
+    if (!playerCard) {
+      return;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      centerElementInViewport(playerCard);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [videoId]);
 
   useEffect(() => {
     if (!control.enabled) {
@@ -401,6 +467,7 @@ export function WatchPlayer({
           height: "100%",
           videoId,
           playerVars: {
+            autoplay: 1,
             enablejsapi: 1,
             iv_load_policy: 3,
             origin: window.location.origin,
@@ -408,6 +475,15 @@ export function WatchPlayer({
             rel: 0,
           },
           events: {
+            onReady: (event) => {
+              ensureIframeAllowsAutoplay(playerHostRef.current);
+
+              try {
+                event.target.playVideo();
+              } catch {
+                // Ignore autoplay failures caused by browser media policies.
+              }
+            },
             onStateChange: (event) => {
               const currentVideoId = extractVideoIdFromUrl(
                 event.target.getVideoUrl(),
@@ -568,7 +644,7 @@ export function WatchPlayer({
 
   return (
     <>
-      <section className="player-card">
+      <section className="player-card" ref={playerCardRef}>
         <div className="player-frame player-frame--managed">
           {guardState.status === "ready" ? (
             <div className="player-host" ref={playerHostRef} title={title} />

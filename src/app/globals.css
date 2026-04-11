@@ -102,7 +102,6 @@ code {
 
 .hero__copy h1,
 .page-banner h1,
-.watch-header h1,
 .section__heading h2,
 .empty-card h2,
 .empty-card h3,
@@ -122,8 +121,7 @@ code {
 .hero__panel p,
 .page-banner p,
 .section__heading p,
-.empty-card p,
-.watch-header p {
+.empty-card p {
   margin: 0;
   color: var(--muted);
   line-height: 1.6;
@@ -679,12 +677,6 @@ code {
   text-align: left;
 }
 
-.watch-header {
-  display: grid;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
 .player-frame {
   overflow: hidden;
   border-radius: 24px;
@@ -758,11 +750,6 @@ code {
 
 .switch-guard__timer {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 0.96rem;
-}
-
-.watch-note {
-  color: var(--muted);
   font-size: 0.96rem;
 }
 

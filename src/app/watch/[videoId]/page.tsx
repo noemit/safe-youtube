@@ -92,20 +92,6 @@ export default async function WatchPage({
     <main className="shell shell--compact">
       <StickyTopNav backHref={backHref} showBack={cameFromCategory} />
 
-      <section className="watch-header">
-        <div>
-          <span className="eyebrow">Watching</span>
-          <h1>{preview?.title ?? "YouTube video"}</h1>
-          <p>{preview?.channelTitle ?? "Approved content"}</p>
-          {config.videoSwitchingControl.enabled ? (
-            <p className="watch-note">
-              Rapid-switch guard is on. If a child jumps between too many
-              videos too quickly, the next video pauses for a moment.
-            </p>
-          ) : null}
-        </div>
-      </section>
-
       <WatchPlayer
         categories={config.categories}
         control={config.videoSwitchingControl}
